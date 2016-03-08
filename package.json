@@ -1,0 +1,34 @@
+{
+  "name": "interactive-shotchart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chelseatcheung/interactive-shotchart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chelseatcheung/interactive-shotchart/issues"
+  },
+  "homepage": "https://github.com/chelseatcheung/interactive-shotchart#readme",
+  "dependencies": {
+    "babel-core": "^6.6.5",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "csvtojson": "^0.5.2",
+    "express": "^4.13.4",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-csv2json": "^0.2.5",
+    "gulp-rename": "^1.2.2",
+    "webpack": "^1.12.14"
+  }
+}
