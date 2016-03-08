@@ -4,20 +4,30 @@ var app = express();
 var path = require('path');
 var PORT = process.env.PORT || 3000;
 var connection = require('./database/connections.js');
+var SeasonOne = require('./database/models/2006-2007.js');
+var SeasonTwo = require('./database/models/2007-2008.js');
+var SeasonThree = require('./database/models/2008-2009.js');
+var SeasonFour = require('./database/models/2009-2010.js');
+var obj1;
 
 app.use(express.static(path.join(__dirname,'../')));
 
-fs.readdir('../client/assets/game-data/parsed-data/2006-2007.regular_season',function(err,files){
-  if(err){
-    console.log('error: ', err);
-  } else if(!err){
-    console.log('files are: ', JSON.stringify(files[0]));
-  }
-})
+//populates the schemas
+// fs.readFile('../client/assets/combined-data/2009-2010.combined.json', 'utf8', function (err, data) {
+//  if (err) throw err;
+//   obj1 = JSON.parse(data);
+//   console.log('obj1 length is ', obj1.length);
+//   for(var i=0; i < obj1.length; i++) {
+//     SeasonFour.create(obj1[i], function(err, doc) {
+//       if(err) {
+//         console.log('error in creating new doc');
+//       } else {
+//         console.log('doc created is ', doc);
+//       }
+//     })
+//   }
+// });
 
-
-// var my_data = require('../client/assets/game-data/parsed-data/2006-2007.regular_season/20061031.CHIMIA.json');
-// console.log('my_data :', my_data);
 
 app.listen(PORT, function() {
   console.log('listening on port 3000...')
