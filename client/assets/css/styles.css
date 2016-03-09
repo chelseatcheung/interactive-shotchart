@@ -1,0 +1,17 @@
+#wheel-container {
+  position:absolute;
+  color:#e54b4b;
+  background:white;
+  height:100%;
+  width:50%;
+  left: 0;
+}
+
+#topfive-container {
+  position:absolute;
+  color:white;
+  background:#e54b4b;
+  height:100%;
+  width:50%;
+  right: 0;
+}

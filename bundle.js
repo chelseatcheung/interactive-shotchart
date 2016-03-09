@@ -46,6 +46,8 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
+	var Wheel = __webpack_require__(159);
+	var TopFive = __webpack_require__(160);
 
 	var Main = React.createClass({
 	  displayName: 'Main',
@@ -56,8 +58,17 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
-	      'Hello'
+	      { className: 'main-container' },
+	      React.createElement(
+	        'div',
+	        { className: 'left-container' },
+	        React.createElement(Wheel, null)
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'left-container' },
+	        React.createElement(TopFive, null)
+	      )
 	    );
 	  }
 	});
@@ -19664,6 +19675,54 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
+
+	var Wheel = React.createClass({
+	  displayName: 'Wheel',
+
+	  // getInitialState() {
+
+	  // }
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { id: 'wheel-container' },
+	      'Wheel Container'
+	    );
+	  }
+	});
+
+	module.exports = Wheel;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
+
+	var TopFive = React.createClass({
+	  displayName: 'TopFive',
+
+	  // getInitialState() {
+
+	  // }
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { id: 'topfive-container' },
+	      'Top Five Container'
+	    );
+	  }
+	});
+
+	module.exports = TopFive;
 
 /***/ }
 /******/ ]);
