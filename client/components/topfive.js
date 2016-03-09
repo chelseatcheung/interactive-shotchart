@@ -9,7 +9,6 @@ var TopFive = React.createClass({
   render: function() {
     return (
       <div id="topfive-container">
-        Top Five Container
       </div>
       )
   }
