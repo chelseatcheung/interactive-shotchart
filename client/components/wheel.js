@@ -7,7 +7,6 @@ var $ = require('jquery');
 var config = {
   chart: {
             plotBackgroundColor: null,
-            // plotBorderWidth: 1,//null,
             plotShadow: false
         },
   title: {
@@ -19,8 +18,8 @@ var config = {
   plotOptions: {
       pie: {
           cursor: 'pointer',
-          dataLabels: {
-              enabled: false
+           dataLabels: {
+              enabled: true
           },
           point:{
             events:{
@@ -35,12 +34,12 @@ var config = {
             type: 'pie',
             name: 'Browser share',
             data: [
-                ['Stats1', 16.6],
-                ['Stats2', 16.6],
-                ['Stats3', 16.6],
-                ['Stats4', 16.6],
-                ['Stats5', 16.6],
-                ['Stats6', 16.6]
+                ['Points Per Game', 16.6],
+                ['Rebounds Per Game', 16.6],
+                ['Assists Per Game', 16.6],
+                ['Steals Per Game', 16.6],
+                ['Free Throw %', 16.6],
+                ['Three Points %', 16.6]
             ]
           }]
     // function(){
@@ -63,34 +62,43 @@ var Wheel = React.createClass({
   componentDidMount: function() {
     // var chart = this.refs.chart.getChart();
     // chart.series[0].addPoint({x:10, y:12});
-    var maxPoint = null;
-      $.each(this.series[0].points, function(i,j){
-        if (maxPoint === null || j.percentage > maxPoint.percentage){
-          maxPoint = j;
-        }
-      });
-    this.moveToPoint(maxPoint);
+    // var maxPoint = null;
+    //   $.each(this.series[0].points, function(i,j){
+    //     if (maxPoint === null || j.percentage > maxPoint.percentage){
+    //       maxPoint = j;
+    //     }
+    //   });
+    // this.moveToPoint(maxPoint);
   },
   moveToPoint: function(clickPoint) {
-    var points = clickPoint.series.points;
-    var startAngle = 0;
-    for (var i = 0; i < points.length; i++){
-      var p = points[i];
-      if (p == clickPoint)
-      {
-        break;
-      }
-      startAngle += (p.percentage/100.0 * 360.0);
-    }
-    clickPoint.series.update({
-      //startAngle: -startAngle + 180 // start at 180
-      startAngle: -startAngle + 180 - ((clickPoint.percentage/100.0 * 360.0)/2) // center at 180
-    });
+    // var points = clickPoint.series.points;
+    // var startAngle = 0;
+    // for (var i = 0; i < points.length; i++){
+    //   var p = points[i];
+    //   if (p == clickPoint)
+    //   {
+    //     break;
+    //   }
+    //   startAngle += (p.percentage/100.0 * 360.0);
+    // }
+    // clickPoint.series.update({
+    //   //startAngle: -startAngle + 180 // start at 180
+    //   startAngle: -startAngle + 180 - ((clickPoint.percentage/100.0 * 360.0)/2) // center at 180
+    // });
+  },
+  highestPoints: function() {
+    // $.ajax({
+    //   method:'get',
+    //   url:'/endpoint',
+
+    // })
   },
   render: function() {
     return (
       <div id="wheel-container">
-        <ReactHighcharts config={config} ref="chart"></ReactHighcharts>
+        <button onClick={this.highestPoints}>Find Highest Points Per Game</button>
+        <div className="main-header">NBA SHOTCHART</div>
+        <ReactHighcharts className="highchart" config={config} ref="chart"></ReactHighcharts>
       </div>
       )
   }

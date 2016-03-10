@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var SeasonTwoSchema = new Schema({
-    _id: Schema.Types.Mixed,
+var SeasonSchema = new Schema({
+    _id: String,
     games: [{
         events: [{
                     y: Number,
@@ -41,6 +41,6 @@ var SeasonTwoSchema = new Schema({
     }]
 })
 
-var SeasonTwo = mongoose.model('SeasonTwo', SeasonTwoSchema);
+var Season = mongoose.model('Season', SeasonSchema);
 
-module.exports = SeasonTwo;
+module.exports = Season;
