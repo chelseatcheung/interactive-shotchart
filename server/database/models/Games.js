@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var GamesSchema = new Schema({
-  game: String,
-  season: String,
-  events: []
+    _id: String,
+    game: String,
+    season: String,
+    events: [{type: Schema.Types.ObjectId, ref:'Events'}]
 })
 
 var Games = mongoose.model('Games', GamesSchema);

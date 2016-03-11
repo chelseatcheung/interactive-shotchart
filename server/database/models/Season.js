@@ -3,10 +3,7 @@ var Schema = mongoose.Schema;
 
 var SeasonSchema = new Schema({
     _id: String,
-    games: [{
-        events: [{
-        }]
-    }]
+    games: [{type: Schema.Types.ObjectId, ref:'Games'}]
 })
 
 var Season = mongoose.model('Season', SeasonSchema);

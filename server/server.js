@@ -4,32 +4,40 @@ var app = express();
 var path = require('path');
 var PORT = process.env.PORT || 3000;
 var connection = require('./database/connections.js');
+var Event = require('./database/models/Events.js');
 var Season = require('./database/models/Season.js');
 var arrayOfObj;
 app.use(express.static(path.join(__dirname,'../')));
 
 
 //function that creates new instance of schema
-var createNewSeason = function() {
-  Season.create({_id:"SeasonFour"}, function(err,doc){
-    if(err) { 
-      console.log('error: ', err)
-    } else { 
-      console.log('doc created is: ',doc)
-    };
-  });
+var createNewEvent = function(obj,seas,gam) {
+  // console.log('in createNewEvent'); 
+  var creation = new Event(obj);
+  creation.game = gam;
+  creation.season= seas;
+  creation.save(function(err){
+    if(err){
+      console.log('save error: ',err);
+    }else{
+      console.log('saved!');
+    }
+  })
 }
 
 //fucntion to check that the accurate info is in the database
 var findFromDB = function (season) {
-  Season.find({_id:season},function(err,result){
+  Event.find({},function(err,result){
     if(err) {
      console.log('error: ', err)
    } else {
     console.log('result is ', result);
    };
-  });
-}
+  }).count({},function(err,count){console.log('count is ',count)});
+};
+
+
+
 
 //function that removes a schema/database
 var removeSeason = function () {
@@ -42,34 +50,28 @@ var removeSeason = function () {
   })
 }
 
-//iterate through games and push into season.games
-//push array of events into seanson.games[i].events
-
 
 // populates the schemas
-// fs.readdir('../client/assets/parsed-data/2006-2007.regular_season',function(err,files){
-//   for(var i = 0; i < files.length; i++){
-//     Season.update({_id:"SeasonOne"},{$push:{"games":{}}})
-
-
-    // fs.readFile('../client/assets/parsed-data/2006-2007.regular_season/'+files[i], 'utf8', function (err, data) {
-      // Season.
-    //  if (err) throw err;
-    //   arrayOfObj = JSON.parse(data);
-    //   Season.gamesevents = arrayOfObj;
-      // for(var i=0; i < obj.length; i++) {
-      //   SeasonFour.create(obj[i], function(err, doc) {
-      //     if(err) {
-      //       console.log('error in creating new doc');
-      //     } else {
-      //       console.log('doc created is ', doc);
-      //     }
-      //   })
-      // }
-    // });
-
-  // }
-  // })
+// look through 2006-2007 folder
+fs.readdir('../client/assets/parsed-data/2006-2007.regular_season',function(err,files){
+  var season = "SeasonOne";
+  var game;
+  //loop through the files in folder
+  for(var i=0;i < files.length; i++) {
+    game = files[i].substring(9,15)
+    //read through the content of the files (an array of objects)
+    fs.readFile('../client/assets/parsed-data/2006-2007.regular_season/'+files[i], 'utf8', function (err, data) {
+       if(err) {
+        throw err;
+       } else {
+        arrayOfObj = JSON.parse(data);
+        for(var i=0; i < arrayOfObj.length; i++) {
+          createNewEvent(arrayOfObj[i], season, game);
+        }
+       }
+    })
+  }
+})
 
 
 
