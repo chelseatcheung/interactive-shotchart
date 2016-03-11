@@ -20,9 +20,9 @@ var createNewSeason = function() {
   });
 }
 
-//fucntion that finds needed data from a certain schema
-var findFromDB = function () {
-  Season.find({_id:"SeasonOne"},function(err,result){
+//fucntion to check that the accurate info is in the database
+var findFromDB = function (season) {
+  Season.find({_id:season},function(err,result){
     if(err) {
      console.log('error: ', err)
    } else {
@@ -48,18 +48,15 @@ var removeSeason = function () {
 
 // populates the schemas
 // fs.readdir('../client/assets/parsed-data/2006-2007.regular_season',function(err,files){
-
 //   for(var i = 0; i < files.length; i++){
 //     Season.update({_id:"SeasonOne"},{$push:{"games":{}}})
 
 
     // fs.readFile('../client/assets/parsed-data/2006-2007.regular_season/'+files[i], 'utf8', function (err, data) {
+      // Season.
     //  if (err) throw err;
     //   arrayOfObj = JSON.parse(data);
     //   Season.gamesevents = arrayOfObj;
-      // for(var i=0; i < arrayObobj.length; i++) {
-      //   SeasonOne.
-      // }
       // for(var i=0; i < obj.length; i++) {
       //   SeasonFour.create(obj[i], function(err, doc) {
       //     if(err) {
@@ -72,7 +69,6 @@ var removeSeason = function () {
     // });
 
   // }
-  // console.log('done!');
   // })
 
 
