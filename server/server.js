@@ -8,6 +8,70 @@ var Event = require('./database/models/Events.js');
 app.use(express.static(path.join(__dirname,'../')));
 var arrayOfObj;
 
+app.use('/highestpoints', function(req, res) {
+  Event.aggregate([
+    {$match:{
+      $or:[
+      {"num":{$gt:0}}, 
+      {"points":{$gt:0}}
+      ]
+    }},
+    {$group:{
+      _id: "$player", 
+      total_freethrows:{$sum:"$num"},
+      total_shots:{$sum:"$points"},
+      games:{$addToSet:"$game"},
+      teams: {$addToSet:"$team"}
+    }}, 
+    {$project: {
+      _id:true,
+      average_points: {$divide:[{$add:["$total_freethrows", "$total_shots"]}, {$size:"$games"}]},
+      teams: true
+    }},
+    {$sort:{
+      average_points: -1,
+    }},
+    {$limit:5
+    }
+  ], function(err, results) {
+    if(err){
+      throw err;
+    } else {
+      console.log('results are, ', results)
+      res.send(results)
+    }
+  })
+})
+
+app.use('/highestrebounds', function(req, res) {
+  Event.aggregate([
+    {$match:{
+      etype: "rebound"
+    }},
+    {$group:{
+      _id:"$player",
+      total_rebounds: {$push: "$etype"},
+      games:{$addToSet:"$game"},
+      teams: {$addToSet: "$team"}
+    }},
+    {$project: {
+      _id:true,
+      average_rebounds: {$divide:[{$size:"$total_rebounds"},{$size:"$games"}]},
+      teams:true
+    }},
+    {$sort: {
+      average_rebounds: -1
+    }},
+    {$limit:5
+    }
+    ], function(err, results) {
+      if(err) {throw err;} else {
+        console.log('results are ', results)
+        res.send(results)
+      }
+    })
+})
+
 
 //function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
@@ -26,14 +90,14 @@ var createNewEvent = function(obj,seas,gam) {
 
 //fucntion to check that the accurate info is in the database
 var findFromDB = function (season) {
-  Event.find({player: 'Stephen Curry'},function(err,result){
+  Event.find({game:'PHIDAL'},function(err,result){
     if(err) {
      console.log('error: ', err)
    } else {
     console.log('results is', result);
    };
   }).count({},function(err,count){console.log('count is ',count)});
-}();
+};
 
 
 
@@ -50,13 +114,13 @@ var removeSeason = function () {
 };
 
 
-//creates the events
+// creates the Events
 // fs.readdir('../client/assets/parsed-data/2009-2010.regular_season', function(err,files){
 //  var season = "SeasonFour";
 //  var game;
 //  // console.log('files are ', files.length) 1215
-//  //loop through the files in folder
-//  for(var i=1001;i < files.length; i++) {
+//  // loop through the files in folder
+//  for(var i=201;i <= 251; i++) {
 //    game = files[i].substring(9,15);
 //    //read through the content of the files (an array of objects)
 //    (function(position,contest){
