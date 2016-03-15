@@ -62,7 +62,7 @@ app.use('/highestrebounds', function(req, res) {
     {$sort: {
       average_rebounds: -1
     }},
-    {$limit:5
+    {$limit:6
     }
     ], function(err, results) {
       if(err) {throw err;} else {
@@ -72,6 +72,64 @@ app.use('/highestrebounds', function(req, res) {
     })
 })
 
+app.use('/highestassists', function(req, res) {
+  Event.aggregate([
+    {$match:{
+      assist: {$exists:true}
+    }},
+    {$group:{
+      _id:"$assist",
+      total_assists: {$push: "$assist"},
+      games:{$addToSet:"$game"},
+      teams: {$addToSet: "$team"}
+    }},
+    {$project: {
+      _id:true,
+      average_assists: {$divide:[{$size:"$total_assists"},{$size:"$games"}]},
+      teams:true
+    }},
+    {$sort: {
+      average_assists: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {throw err;} else {
+        console.log('results are ', results)
+        res.send(results)
+      }
+    })
+})
+
+
+app.use('/higheststeals', function(req, res) {
+  Event.aggregate([
+    {$match:{
+      steal: {$exists:true}
+    }},
+    {$group:{
+      _id:"$steal",
+      total_steals: {$push: "$steal"},
+      games:{$addToSet:"$game"},
+      teams: {$addToSet: "$team"}
+    }},
+    {$project: {
+      _id:true,
+      average_steals: {$divide:[{$size:"$total_steals"},{$size:"$games"}]},
+      teams:true
+    }},
+    {$sort: {
+      average_steals: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {throw err;} else {
+        console.log('results are ', results)
+        // res.send(results)
+      }
+    })
+})
 
 //function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {

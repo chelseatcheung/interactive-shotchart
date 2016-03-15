@@ -26,12 +26,32 @@ var Slider = React.createClass({
     console.log('in initEvents');
   },
   highestPoints: function() {
-    console.log('in highestPoints');
+    $.get('/highestpoints', function(results) {
+      console.log('results are ', results)
+    })
+  },
+  highestRebounds: function() {
+    $.get('/highestrebounds', function(results) {
+      console.log('results are ', results)
+    })
+  },
+  highestAssists: function() {
+      $.get('/highestassists', function(results) {
+      console.log('results are ', results)
+    })
+  },
+  highestSteals: function() {
+    $.get('/higheststeals', function(results) {
+    console.log('results are ', results)
+  })
   },
   render: function() {
     return (
     <div>
       <button onClick={this.highestPoints}>Highest Points Per Game</button>
+      <button onClick={this.highestRebounds}>Highest Rebounds Per Game</button>
+      <button onClick={this.highestAssists}>Highest Assists Per Game</button>
+      <button onClick={this.highestSteals}>Highest Steals Per Game</button>
       <div id="mi-slider" className="mi-slider">
         <ul>
           <li><a href="#"><img src="" alt="img01"/><h4>Boots</h4></a></li>

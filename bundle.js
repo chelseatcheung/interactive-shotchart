@@ -19761,7 +19761,24 @@
 	    console.log('in initEvents');
 	  },
 	  highestPoints: function () {
-	    console.log('in highestPoints');
+	    $.get('/highestpoints', function (results) {
+	      console.log('results are ', results);
+	    });
+	  },
+	  highestRebounds: function () {
+	    $.get('/highestrebounds', function (results) {
+	      console.log('results are ', results);
+	    });
+	  },
+	  highestAssists: function () {
+	    $.get('/highestassists', function (results) {
+	      console.log('results are ', results);
+	    });
+	  },
+	  highestSteals: function () {
+	    $.get('/higheststeals', function (results) {
+	      console.log('results are ', results);
+	    });
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -19771,6 +19788,21 @@
 	        'button',
 	        { onClick: this.highestPoints },
 	        'Highest Points Per Game'
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.highestRebounds },
+	        'Highest Rebounds Per Game'
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.highestAssists },
+	        'Highest Assists Per Game'
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.highestSteals },
+	        'Highest Steals Per Game'
 	      ),
 	      React.createElement(
 	        'div',
