@@ -1,3 +1,8 @@
+@font-face {
+  font-family: avenir;
+  src: url('../fonts/avenir-book.ttf');
+}
+
 .mi-slider {
   position: relative;
   margin-top: 30px;
@@ -42,6 +47,8 @@
 
 .mi-slider ul li a,
 .mi-slider ul li img {
+  width:200px;
+  height:140px;
   display: block;
   margin: 0 auto;
 }
@@ -56,13 +63,13 @@
   border: none;
 }
 
-.mi-slider ul li h4 {
+.mi-slider ul li {
   display: inline-block;
-  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
-  font-style: italic;
+  font-family: avenir, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  /*font-style: italic;*/
   font-weight: 400;
   font-size: 18px;
-  padding: 20px 10px 0;
+  /*padding: -20px;*/
 }
 
 /*.mi-slider ul li:hover {
@@ -99,6 +106,7 @@
 .mi-slider nav a.mi-selected {
   text-decoration:none;
   color: #000;
+  font-weight:bold;
 }
 
 .mi-slider nav a.mi-selected:after,

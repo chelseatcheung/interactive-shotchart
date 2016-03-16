@@ -19734,6 +19734,7 @@
 
 	var React = __webpack_require__(1);
 	var $ = __webpack_require__(162);
+	var playerImgs = __webpack_require__(163);
 
 	var Slider = React.createClass({
 	  displayName: 'Slider',
@@ -19742,7 +19743,7 @@
 	    return {
 	      // animEndEventName: animEndEventNames[Modernizr.prefixed('animation')],
 	      isAnimating: false,
-	      option1: 'Points \nPer Game',
+	      option1: 'Points Per Game',
 	      option2: 'Rebounds Per Game',
 	      option3: 'Assists Per Game',
 	      option4: 'Steals Per Game',
@@ -19765,10 +19766,10 @@
 	      console.log('results are ', results);
 	      this.setState({
 	        stats1: [results[0]['_id'], results[0]['average_points'], results[0]['teams'][0]],
-	        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][1]],
-	        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][2]],
-	        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][3]],
-	        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][4]]
+	        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][0]],
+	        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][0]],
+	        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][0]],
+	        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][0]]
 	      });
 	    }.bind(this));
 	  },
@@ -19820,47 +19821,77 @@
 	          React.createElement(
 	            'li',
 	            null,
+	            React.createElement('img', { src: playerImgs[this.state.stats1[0]] }),
 	            React.createElement(
-	              'h4',
-	              null,
+	              'span',
+	              { className: 'player-name' },
 	              this.state.stats1[0]
-	            )
+	            ),
+	            React.createElement('br', null),
+	            'Team: ',
+	            this.state.stats1[2],
+	            React.createElement('br', null),
+	            this.state.stats1[1]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
+	            React.createElement('img', { src: playerImgs[this.state.stats2[0]] }),
 	            React.createElement(
-	              'h4',
-	              null,
+	              'span',
+	              { className: 'player-name' },
 	              this.state.stats2[0]
-	            )
+	            ),
+	            React.createElement('br', null),
+	            'Team: ',
+	            this.state.stats2[2],
+	            React.createElement('br', null),
+	            this.state.stats2[1]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
+	            React.createElement('img', { src: playerImgs[this.state.stats3[0]] }),
 	            React.createElement(
-	              'h4',
-	              null,
+	              'span',
+	              { className: 'player-name' },
 	              this.state.stats3[0]
-	            )
+	            ),
+	            React.createElement('br', null),
+	            'Team: ',
+	            this.state.stats3[2],
+	            React.createElement('br', null),
+	            this.state.stats3[1]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
+	            React.createElement('img', { src: playerImgs[this.state.stats4[0]] }),
 	            React.createElement(
-	              'h4',
-	              null,
+	              'span',
+	              { className: 'player-name' },
 	              this.state.stats4[0]
-	            )
+	            ),
+	            React.createElement('br', null),
+	            'Team: ',
+	            this.state.stats4[2],
+	            React.createElement('br', null),
+	            this.state.stats4[1]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
+	            React.createElement('img', { src: playerImgs[this.state.stats5[0]] }),
 	            React.createElement(
-	              'h4',
-	              null,
+	              'span',
+	              { className: 'player-name' },
 	              this.state.stats5[0]
-	            )
+	            ),
+	            React.createElement('br', null),
+	            'Team: ',
+	            this.state.stats5[2],
+	            React.createElement('br', null),
+	            this.state.stats5[1]
 	          )
 	        ),
 	        React.createElement(
@@ -19869,47 +19900,27 @@
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Belts'
-	            )
+	            'Belts'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Hats & Caps'
-	            )
+	            'Hats & Caps'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Sunglasses'
-	            )
+	            'Sunglasses'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Scarves'
-	            )
+	            'Scarves'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Scarves'
-	            )
+	            'Scarves'
 	          )
 	        ),
 	        React.createElement(
@@ -19918,38 +19929,27 @@
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Casual'
-	            )
+	            'Casual'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Luxury'
-	            )
+	            'Luxury'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Sport'
-	            )
+	            'Sport'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Sport'
-	            )
+	            'Sport'
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            'Sport'
 	          )
 	        ),
 	        React.createElement(
@@ -19958,47 +19958,27 @@
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Carry-Ons'
-	            )
+	            'Carry-Ons'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Duffel Bags'
-	            )
+	            'Duffel Bags'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Laptop Bags'
-	            )
+	            'Laptop Bags'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Briefcases'
-	            )
+	            'Briefcases'
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Briefcases'
-	            )
+	            'Briefcases'
 	          )
 	        ),
 	        React.createElement(
@@ -29868,6 +29848,20 @@
 	return jQuery;
 	}));
 
+
+/***/ },
+/* 163 */
+/***/ function(module, exports) {
+
+	var playerImgs = {
+	  'Kevin Martin': 'http://l.yimg.com/bt/api/res/1.2/NN7Vr0lFsVQVQ1sEzQ78JQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3843.png',
+	  'Dwyane Wade': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1987.png&w=350&h=254',
+	  'Carmelo Anthony': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1975.png&w=350&h=254',
+	  'LeBron James': 'http://forums.nba-live.com/dl_mod/thumbs/3638_MIA_James_LeBron.png',
+	  'Kobe Bryant': 'http://www.financialnewsusa.com/wp-content/uploads/2014/12/1101.png'
+	};
+
+	module.exports = playerImgs;
 
 /***/ }
 /******/ ]);

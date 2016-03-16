@@ -1,5 +1,6 @@
 var React = require('react');
 var $ = require('jquery');
+var playerImgs = require('../assets/playerimages.js');
 
 
 var Slider = React.createClass({
@@ -7,7 +8,7 @@ var Slider = React.createClass({
     return {
       // animEndEventName: animEndEventNames[Modernizr.prefixed('animation')],
       isAnimating: false,
-      option1: 'Points \nPer Game',
+      option1: 'Points Per Game',
       option2: 'Rebounds Per Game',
       option3: 'Assists Per Game',
       option4: 'Steals Per Game',
@@ -30,10 +31,10 @@ var Slider = React.createClass({
       console.log('results are ', results)
       this.setState({
         stats1: [results[0]['_id'], results[0]['average_points'], results[0]['teams'][0]],
-        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][1]],
-        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][2]],
-        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][3]],
-        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][4]],
+        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][0]],
+        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][0]],
+        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][0]],
+        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][0]],
       })
     }.bind(this))
   },
@@ -61,31 +62,57 @@ var Slider = React.createClass({
       <button onClick={this.highestSteals}>Highest Steals Per Game</button>
       <div id="mi-slider" className="mi-slider">
         <ul>
-          <li><h4>{this.state.stats1[0]}</h4></li>
-          <li><h4>{this.state.stats2[0]}</h4></li>
-          <li><h4>{this.state.stats3[0]}</h4></li>
-          <li><h4>{this.state.stats4[0]}</h4></li>
-          <li><h4>{this.state.stats5[0]}</h4></li>
+          <li>
+            <img src={playerImgs[this.state.stats1[0]]}/>
+            <span className="player-name">{this.state.stats1[0]}</span>
+            <br/>Team: {this.state.stats1[2]}
+            <br/>{this.state.stats1[1]}
+          </li>
+          <li>
+            <img src={playerImgs[this.state.stats2[0]]}/>
+            <span className="player-name">{this.state.stats2[0]}</span>
+            <br/>Team: {this.state.stats2[2]}
+            <br/>{this.state.stats2[1]}
+          </li>
+          <li>
+            <img src={playerImgs[this.state.stats3[0]]}/>
+            <span className="player-name">{this.state.stats3[0]}</span>
+            <br/>Team: {this.state.stats3[2]}
+            <br/>{this.state.stats3[1]}
+          </li>
+          <li>
+            <img src={playerImgs[this.state.stats4[0]]}/>
+            <span className="player-name">{this.state.stats4[0]}</span>
+            <br/>Team: {this.state.stats4[2]}
+            <br/>{this.state.stats4[1]}
+          </li>
+          <li>
+            <img src={playerImgs[this.state.stats5[0]]}/>
+            <span className="player-name">{this.state.stats5[0]}</span>
+            <br/>Team: {this.state.stats5[2]}
+            <br/>{this.state.stats5[1]}
+          </li>
         </ul>
         <ul>
-          <li><h4>Belts</h4></li>
-          <li><h4>Hats & Caps</h4></li>
-          <li><h4>Sunglasses</h4></li>
-          <li><h4>Scarves</h4></li>
-          <li><h4>Scarves</h4></li>
+          <li>Belts</li>
+          <li>Hats & Caps</li>
+          <li>Sunglasses</li>
+          <li>Scarves</li>
+          <li>Scarves</li>
         </ul>
         <ul>
-          <li><h4>Casual</h4></li>
-          <li><h4>Luxury</h4></li>
-          <li><h4>Sport</h4></li>
-          <li><h4>Sport</h4></li>
+          <li>Casual</li>
+          <li>Luxury</li>
+          <li>Sport</li>
+          <li>Sport</li>
+          <li>Sport</li>
         </ul>
         <ul>
-          <li><h4>Carry-Ons</h4></li>
-          <li><h4>Duffel Bags</h4></li>
-          <li><h4>Laptop Bags</h4></li>
-          <li><h4>Briefcases</h4></li>
-          <li><h4>Briefcases</h4></li>
+          <li>Carry-Ons</li>
+          <li>Duffel Bags</li>
+          <li>Laptop Bags</li>
+          <li>Briefcases</li>
+          <li>Briefcases</li>
         </ul>
         <nav>
           <a href="#">{this.state.option1}</a>

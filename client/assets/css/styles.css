@@ -3,28 +3,15 @@
   src: url('../fonts/Avenir-LT-65-Medium.ttf');
 }
 
-#wheel-container {
-  position:absolute;
-  /*color:#e54b4b;*/
-  background:white;
-  height:100%;
-  width:50%;
-  left: 0;
-}
-
-#topfive-container {
-  position:absolute;
-  color:white;
-  background:#e54b4b;
-  height:100%;
-  width:50%;
-  right: 0;
-}
-
 .main-header {
   padding-top:10px;
   padding-left:20px;
   font-family: 'Open Sans', sans-serif;
   font-weight:700;
   font-size: 30px;
+}
+
+
+.player-name {
+  color: #e54b4b;
 }
