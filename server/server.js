@@ -25,11 +25,11 @@ app.use('/highestpoints', function(req, res) {
     }}, 
     {$project: {
       _id:true,
-      average_points: {$divide:[{$add:["$total_freethrows", "$total_shots"]}, {$size:"$games"}]},
+      score: {$divide:[{$add:["$total_freethrows", "$total_shots"]}, {$size:"$games"}]},
       teams: true
     }},
     {$sort:{
-      average_points: -1,
+      score: -1,
     }},
     {$limit:5
     }
@@ -56,11 +56,11 @@ app.use('/highestrebounds', function(req, res) {
     }},
     {$project: {
       _id:true,
-      average_rebounds: {$divide:[{$size:"$total_rebounds"},{$size:"$games"}]},
+      score: {$divide:[{$size:"$total_rebounds"},{$size:"$games"}]},
       teams:true
     }},
     {$sort: {
-      average_rebounds: -1
+      score: -1
     }},
     {$limit:6
     }
@@ -85,11 +85,11 @@ app.use('/highestassists', function(req, res) {
     }},
     {$project: {
       _id:true,
-      average_assists: {$divide:[{$size:"$total_assists"},{$size:"$games"}]},
+      score: {$divide:[{$size:"$total_assists"},{$size:"$games"}]},
       teams:true
     }},
     {$sort: {
-      average_assists: -1
+      score: -1
     }},
     {$limit:6
     }
@@ -115,11 +115,11 @@ app.use('/higheststeals', function(req, res) {
     }},
     {$project: {
       _id:true,
-      average_steals: {$divide:[{$size:"$total_steals"},{$size:"$games"}]},
+      score: {$divide:[{$size:"$total_steals"},{$size:"$games"}]},
       teams:true
     }},
     {$sort: {
-      average_steals: -1
+      score: -1
     }},
     {$limit:6
     }
@@ -131,9 +131,34 @@ app.use('/higheststeals', function(req, res) {
     })
 })
 
-//function that creates new instance of schema
+//function that creates the docs
+//had to add them in increments or else server would crash, hence the specific number in the for loop
+function createDocs () {
+  fs.readdir('../client/assets/parsed-data/2009-2010.regular_season', function(err,files){
+   var season = "SeasonFour";
+   var game;
+   // loop through the files in folder
+   for(var i=201;i <= 251; i++) {
+     game = files[i].substring(9,15);
+     //read through the content of the files (an array of objects)
+     (function(position,contest){
+       fs.readFile('../client/assets/parsed-data/2009-2010.regular_season/'+files[position], 'utf8', function (err, data) {
+          if(err) {
+           throw err;
+          } else {
+           arrayOfObj = JSON.parse(data);
+           for(var j=0; j < arrayOfObj.length; j++) {
+             createNewEvent(arrayOfObj[j], season, contest);
+           }
+          }
+       })
+     })(i,game);
+   }
+  })
+}
+
+//helper function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
-  // console.log('in createNewEvent'); 
   var creation = new Event(obj);
   creation.game = gam;
   creation.season= seas;
@@ -146,7 +171,7 @@ var createNewEvent = function(obj,seas,gam) {
   })
 }
 
-//fucntion to check that the accurate info is in the database
+//helper function to check that the accurate info is in the database
 var findFromDB = function (season) {
   Event.find({game:'PHIDAL'},function(err,result){
     if(err) {
@@ -160,7 +185,7 @@ var findFromDB = function (season) {
 
 
 
-//function that removes a schema/database
+//helper function that removes a schema/database
 var removeSeason = function () {
   Event.remove({},function(err){
     if(err){
@@ -170,32 +195,6 @@ var removeSeason = function () {
     }
   })
 };
-
-
-// creates the Events
-// fs.readdir('../client/assets/parsed-data/2009-2010.regular_season', function(err,files){
-//  var season = "SeasonFour";
-//  var game;
-//  // console.log('files are ', files.length) 1215
-//  // loop through the files in folder
-//  for(var i=201;i <= 251; i++) {
-//    game = files[i].substring(9,15);
-//    //read through the content of the files (an array of objects)
-//    (function(position,contest){
-
-//      fs.readFile('../client/assets/parsed-data/2009-2010.regular_season/'+files[position], 'utf8', function (err, data) {
-//         if(err) {
-//          throw err;
-//         } else {
-//          arrayOfObj = JSON.parse(data);
-//          for(var j=0; j < arrayOfObj.length; j++) {
-//            createNewEvent(arrayOfObj[j], season, contest);
-//          }
-//         }
-//      })
-//    })(i,game);
-//  }
-// })
 
 
 

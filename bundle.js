@@ -46,8 +46,6 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var Wheel = __webpack_require__(159);
-	var TopFive = __webpack_require__(160);
 	var Slider = __webpack_require__(161);
 
 	var Main = React.createClass({
@@ -64,12 +62,6 @@
 	    );
 	  }
 	});
-	// <div className="left-container">
-	//   <Wheel/>
-	// </div>
-	// <div className="left-container">
-	//   <TopFive/>
-	// </div>
 
 	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 
@@ -19675,60 +19667,8 @@
 
 
 /***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-
-	var Wheel = React.createClass({
-	  displayName: 'Wheel',
-
-	  // getInitialState: function() {
-
-	  // },
-	  componentDidMount: function () {},
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { id: 'wheel-container' },
-	      React.createElement(
-	        'button',
-	        { onClick: this.highestPoints },
-	        'Find Highest Points Per Game'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'main-header' },
-	        'NBA SHOTCHART'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Wheel;
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-
-	var TopFive = React.createClass({
-	  displayName: 'TopFive',
-
-	  // getInitialState() {
-
-	  // }
-	  render: function () {
-	    return React.createElement('div', { id: 'topfive-container' });
-	  }
-	});
-
-	module.exports = TopFive;
-
-/***/ },
+/* 159 */,
+/* 160 */,
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19741,35 +19681,32 @@
 
 	  getInitialState: function () {
 	    return {
-	      // animEndEventName: animEndEventNames[Modernizr.prefixed('animation')],
-	      isAnimating: false,
 	      option1: 'Points Per Game',
 	      option2: 'Rebounds Per Game',
 	      option3: 'Assists Per Game',
 	      option4: 'Steals Per Game',
-	      stats1: [],
-	      stats2: [],
-	      stats3: [],
-	      stats4: [],
-	      stats5: []
+	      stats1: {},
+	      stats2: {},
+	      stats3: {},
+	      stats4: {},
+	      stats5: {}
 	    };
 	  },
 	  componentDidMount: function () {
 	    this.highestPoints();
 	  },
-	  initEvents: function () {
-	    console.log('in initEvents');
+	  filterQuery: function (blah) {
+	    console.log('option is ', blah);
 	  },
 	  highestPoints: function () {
-	    // var info;
 	    $.get('/highestpoints', function (results) {
 	      console.log('results are ', results);
 	      this.setState({
-	        stats1: [results[0]['_id'], results[0]['average_points'], results[0]['teams'][0]],
-	        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][0]],
-	        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][0]],
-	        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][0]],
-	        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][0]]
+	        stats1: results[0],
+	        stats2: results[1],
+	        stats3: results[2],
+	        stats4: results[3],
+	        stats5: results[4]
 	      });
 	    }.bind(this));
 	  },
@@ -19821,77 +19758,77 @@
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement('img', { src: playerImgs[this.state.stats1[0]] }),
+	            React.createElement('img', { src: playerImgs[this.state.stats1["_id"]] }),
 	            React.createElement(
 	              'span',
 	              { className: 'player-name' },
-	              this.state.stats1[0]
+	              this.state.stats1["_id"]
 	            ),
 	            React.createElement('br', null),
 	            'Team: ',
-	            this.state.stats1[2],
+	            this.state.stats1["teams"],
 	            React.createElement('br', null),
-	            this.state.stats1[1]
+	            this.state.stats1["score"]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement('img', { src: playerImgs[this.state.stats2[0]] }),
+	            React.createElement('img', { src: playerImgs[this.state.stats2["_id"]] }),
 	            React.createElement(
 	              'span',
 	              { className: 'player-name' },
-	              this.state.stats2[0]
+	              this.state.stats2["_id"]
 	            ),
 	            React.createElement('br', null),
 	            'Team: ',
-	            this.state.stats2[2],
+	            this.state.stats2["teams"],
 	            React.createElement('br', null),
-	            this.state.stats2[1]
+	            this.state.stats2["score"]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement('img', { src: playerImgs[this.state.stats3[0]] }),
+	            React.createElement('img', { src: playerImgs[this.state.stats3["_id"]] }),
 	            React.createElement(
 	              'span',
 	              { className: 'player-name' },
-	              this.state.stats3[0]
+	              this.state.stats3["_id"]
 	            ),
 	            React.createElement('br', null),
 	            'Team: ',
-	            this.state.stats3[2],
+	            this.state.stats3["teams"],
 	            React.createElement('br', null),
-	            this.state.stats3[1]
+	            this.state.stats3["score"]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement('img', { src: playerImgs[this.state.stats4[0]] }),
+	            React.createElement('img', { src: playerImgs[this.state.stats4["_id"]] }),
 	            React.createElement(
 	              'span',
 	              { className: 'player-name' },
-	              this.state.stats4[0]
+	              this.state.stats4["_id"]
 	            ),
 	            React.createElement('br', null),
 	            'Team: ',
-	            this.state.stats4[2],
+	            this.state.stats4["teams"],
 	            React.createElement('br', null),
-	            this.state.stats4[1]
+	            this.state.stats4["score"]
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
-	            React.createElement('img', { src: playerImgs[this.state.stats5[0]] }),
+	            React.createElement('img', { src: playerImgs[this.state.stats5["_id"]] }),
 	            React.createElement(
 	              'span',
 	              { className: 'player-name' },
-	              this.state.stats5[0]
+	              this.state.stats5["_id"]
 	            ),
 	            React.createElement('br', null),
 	            'Team: ',
-	            this.state.stats5[2],
+	            this.state.stats5["teams"],
 	            React.createElement('br', null),
-	            this.state.stats5[1]
+	            this.state.stats5["score"]
 	          )
 	        ),
 	        React.createElement(
@@ -19986,22 +19923,22 @@
 	          null,
 	          React.createElement(
 	            'a',
-	            { href: '#' },
+	            { onClick: this.filterQuery, href: '#' },
 	            this.state.option1
 	          ),
 	          React.createElement(
 	            'a',
-	            { href: '#' },
+	            { onClick: this.filterQuery.bind(this, 'hey'), href: '#' },
 	            this.state.option2
 	          ),
 	          React.createElement(
 	            'a',
-	            { href: '#' },
+	            { onClick: this.filterQuery, href: '#' },
 	            this.state.option3
 	          ),
 	          React.createElement(
 	            'a',
-	            { href: '#' },
+	            { onClick: this.filterQuery, href: '#' },
 	            this.state.option4
 	          )
 	        )
