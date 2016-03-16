@@ -1,48 +1,55 @@
 var React = require('react');
 var $ = require('jquery');
-// var Modernizr = require('modernizr');
 
-  var animEndEventNames = {
-    'WebkitAnimation' : 'webkitAnimationEnd',
-    'OAnimation' : 'oAnimationEnd',
-    'msAnimation' : 'MSAnimationEnd',
-    'animation' : 'animationend'
-  };
 
 var Slider = React.createClass({
   getInitialState: function() {
     return {
       // animEndEventName: animEndEventNames[Modernizr.prefixed('animation')],
-      isAnimating: false
+      isAnimating: false,
+      option1: 'Points \nPer Game',
+      option2: 'Rebounds Per Game',
+      option3: 'Assists Per Game',
+      option4: 'Steals Per Game',
+      stats1: [],
+      stats2: [],
+      stats3: [],
+      stats4: [],
+      stats5: []
     }
   },
   componentDidMount: function() {
-    // var support = Modernizr.csstransforms && Modernizr.cssanimations;
-    this.$categories = this.$el.children('ul');
-    this.$navcategories = this.$el.fine('nav > a');
-    
+    this.highestPoints();    
     },
   initEvents: function() {
     console.log('in initEvents');
   },
   highestPoints: function() {
+    // var info;
     $.get('/highestpoints', function(results) {
       console.log('results are ', results)
-    })
+      this.setState({
+        stats1: [results[0]['_id'], results[0]['average_points'], results[0]['teams'][0]],
+        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][1]],
+        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][2]],
+        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][3]],
+        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][4]],
+      })
+    }.bind(this))
   },
   highestRebounds: function() {
     $.get('/highestrebounds', function(results) {
-      console.log('results are ', results)
+      console.log('rebound results are ', results)
     })
   },
   highestAssists: function() {
       $.get('/highestassists', function(results) {
-      console.log('results are ', results)
+      console.log('assist results are ', results)
     })
   },
   highestSteals: function() {
     $.get('/higheststeals', function(results) {
-    console.log('results are ', results)
+    console.log('steal results are ', results)
   })
   },
   render: function() {
@@ -54,33 +61,37 @@ var Slider = React.createClass({
       <button onClick={this.highestSteals}>Highest Steals Per Game</button>
       <div id="mi-slider" className="mi-slider">
         <ul>
-          <li><a href="#"><img src="" alt="img01"/><h4>Boots</h4></a></li>
-          <li><a href="#"><img src="" alt="img02"/><h4>Oxfords</h4></a></li>
-          <li><a href="#"><img src="" alt="img03"/><h4>Loafers</h4></a></li>
-          <li><a href="#"><img src="" alt="img04"/><h4>Sneakers</h4></a></li>
+          <li><h4>{this.state.stats1[0]}</h4></li>
+          <li><h4>{this.state.stats2[0]}</h4></li>
+          <li><h4>{this.state.stats3[0]}</h4></li>
+          <li><h4>{this.state.stats4[0]}</h4></li>
+          <li><h4>{this.state.stats5[0]}</h4></li>
         </ul>
         <ul>
-          <li><a href="#"><img src="" alt="img05"/><h4>Belts</h4></a></li>
-          <li><a href="#"><img src="" alt="img06"/><h4>Hats & Caps</h4></a></li>
-          <li><a href="#"><img src="" alt="img07"/><h4>Sunglasses</h4></a></li>
-          <li><a href="#"><img src="" alt="img08"/><h4>Scarves</h4></a></li>
+          <li><h4>Belts</h4></li>
+          <li><h4>Hats & Caps</h4></li>
+          <li><h4>Sunglasses</h4></li>
+          <li><h4>Scarves</h4></li>
+          <li><h4>Scarves</h4></li>
         </ul>
         <ul>
-          <li><a href="#"><img src="" alt="img09"/><h4>Casual</h4></a></li>
-          <li><a href="#"><img src="" alt="img10"/><h4>Luxury</h4></a></li>
-          <li><a href="#"><img src="" alt="img11"/><h4>Sport</h4></a></li>
+          <li><h4>Casual</h4></li>
+          <li><h4>Luxury</h4></li>
+          <li><h4>Sport</h4></li>
+          <li><h4>Sport</h4></li>
         </ul>
         <ul>
-          <li><a href="#"><img src="" alt="img12"/><h4>Carry-Ons</h4></a></li>
-          <li><a href="#"><img src="" alt="img13"/><h4>Duffel Bags</h4></a></li>
-          <li><a href="#"><img src="" alt="img14"/><h4>Laptop Bags</h4></a></li>
-          <li><a href="#"><img src="" alt="img15"/><h4>Briefcases</h4></a></li>
+          <li><h4>Carry-Ons</h4></li>
+          <li><h4>Duffel Bags</h4></li>
+          <li><h4>Laptop Bags</h4></li>
+          <li><h4>Briefcases</h4></li>
+          <li><h4>Briefcases</h4></li>
         </ul>
         <nav>
-          <a href="#">Shoes</a>
-          <a href="#">Accessories</a>
-          <a href="#">Watches</a>
-          <a href="#">Bags</a>
+          <a href="#">{this.state.option1}</a>
+          <a href="#">{this.state.option2}</a>
+          <a href="#">{this.state.option3}</a>
+          <a href="#">{this.state.option4}</a>
         </nav>
       </div>
     </div>

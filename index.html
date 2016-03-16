@@ -5,10 +5,18 @@
     <link rel="stylesheet" href="/client/assets/css/styles.css">
     <link rel="stylesheet" href="/client/assets/css/sliderstyles.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <script src="client/modernizr.custom.63321.js"></script>
     <title>Interactive Shotchart</title>
   </head>
   <body>
     <div id="app"></div>
   </body>
   <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="client/itemslider.js"></script>
+    <script>
+      $(function() {
+        $( '#mi-slider' ).catslider();
+      });
+    </script>
 </html>

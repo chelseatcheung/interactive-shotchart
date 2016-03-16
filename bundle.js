@@ -19734,14 +19734,6 @@
 
 	var React = __webpack_require__(1);
 	var $ = __webpack_require__(162);
-	// var Modernizr = require('modernizr');
-
-	var animEndEventNames = {
-	  'WebkitAnimation': 'webkitAnimationEnd',
-	  'OAnimation': 'oAnimationEnd',
-	  'msAnimation': 'MSAnimationEnd',
-	  'animation': 'animationend'
-	};
 
 	var Slider = React.createClass({
 	  displayName: 'Slider',
@@ -19749,35 +19741,50 @@
 	  getInitialState: function () {
 	    return {
 	      // animEndEventName: animEndEventNames[Modernizr.prefixed('animation')],
-	      isAnimating: false
+	      isAnimating: false,
+	      option1: 'Points \nPer Game',
+	      option2: 'Rebounds Per Game',
+	      option3: 'Assists Per Game',
+	      option4: 'Steals Per Game',
+	      stats1: [],
+	      stats2: [],
+	      stats3: [],
+	      stats4: [],
+	      stats5: []
 	    };
 	  },
 	  componentDidMount: function () {
-	    // var support = Modernizr.csstransforms && Modernizr.cssanimations;
-	    this.$categories = this.$el.children('ul');
-	    this.$navcategories = this.$el.fine('nav > a');
+	    this.highestPoints();
 	  },
 	  initEvents: function () {
 	    console.log('in initEvents');
 	  },
 	  highestPoints: function () {
+	    // var info;
 	    $.get('/highestpoints', function (results) {
 	      console.log('results are ', results);
-	    });
+	      this.setState({
+	        stats1: [results[0]['_id'], results[0]['average_points'], results[0]['teams'][0]],
+	        stats2: [results[1]['_id'], results[1]['average_points'], results[1]['teams'][1]],
+	        stats3: [results[2]['_id'], results[2]['average_points'], results[2]['teams'][2]],
+	        stats4: [results[3]['_id'], results[3]['average_points'], results[3]['teams'][3]],
+	        stats5: [results[4]['_id'], results[4]['average_points'], results[4]['teams'][4]]
+	      });
+	    }.bind(this));
 	  },
 	  highestRebounds: function () {
 	    $.get('/highestrebounds', function (results) {
-	      console.log('results are ', results);
+	      console.log('rebound results are ', results);
 	    });
 	  },
 	  highestAssists: function () {
 	    $.get('/highestassists', function (results) {
-	      console.log('results are ', results);
+	      console.log('assist results are ', results);
 	    });
 	  },
 	  highestSteals: function () {
 	    $.get('/higheststeals', function (results) {
-	      console.log('results are ', results);
+	      console.log('steal results are ', results);
 	    });
 	  },
 	  render: function () {
@@ -19814,56 +19821,45 @@
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img01' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Boots'
-	              )
+	              'h4',
+	              null,
+	              this.state.stats1[0]
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img02' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Oxfords'
-	              )
+	              'h4',
+	              null,
+	              this.state.stats2[0]
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img03' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Loafers'
-	              )
+	              'h4',
+	              null,
+	              this.state.stats3[0]
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img04' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Sneakers'
-	              )
+	              'h4',
+	              null,
+	              this.state.stats4[0]
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'h4',
+	              null,
+	              this.state.stats5[0]
 	            )
 	          )
 	        ),
@@ -19874,56 +19870,45 @@
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img05' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Belts'
-	              )
+	              'h4',
+	              null,
+	              'Belts'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img06' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Hats & Caps'
-	              )
+	              'h4',
+	              null,
+	              'Hats & Caps'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img07' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Sunglasses'
-	              )
+	              'h4',
+	              null,
+	              'Sunglasses'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img08' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Scarves'
-	              )
+	              'h4',
+	              null,
+	              'Scarves'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'h4',
+	              null,
+	              'Scarves'
 	            )
 	          )
 	        ),
@@ -19934,42 +19919,36 @@
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img09' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Casual'
-	              )
+	              'h4',
+	              null,
+	              'Casual'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img10' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Luxury'
-	              )
+	              'h4',
+	              null,
+	              'Luxury'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img11' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Sport'
-	              )
+	              'h4',
+	              null,
+	              'Sport'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'h4',
+	              null,
+	              'Sport'
 	            )
 	          )
 	        ),
@@ -19980,56 +19959,45 @@
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img12' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Carry-Ons'
-	              )
+	              'h4',
+	              null,
+	              'Carry-Ons'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img13' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Duffel Bags'
-	              )
+	              'h4',
+	              null,
+	              'Duffel Bags'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img14' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Laptop Bags'
-	              )
+	              'h4',
+	              null,
+	              'Laptop Bags'
 	            )
 	          ),
 	          React.createElement(
 	            'li',
 	            null,
 	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              React.createElement('img', { src: '', alt: 'img15' }),
-	              React.createElement(
-	                'h4',
-	                null,
-	                'Briefcases'
-	              )
+	              'h4',
+	              null,
+	              'Briefcases'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'h4',
+	              null,
+	              'Briefcases'
 	            )
 	          )
 	        ),
@@ -20039,22 +20007,22 @@
 	          React.createElement(
 	            'a',
 	            { href: '#' },
-	            'Shoes'
+	            this.state.option1
 	          ),
 	          React.createElement(
 	            'a',
 	            { href: '#' },
-	            'Accessories'
+	            this.state.option2
 	          ),
 	          React.createElement(
 	            'a',
 	            { href: '#' },
-	            'Watches'
+	            this.state.option3
 	          ),
 	          React.createElement(
 	            'a',
 	            { href: '#' },
-	            'Bags'
+	            this.state.option4
 	          )
 	        )
 	      )

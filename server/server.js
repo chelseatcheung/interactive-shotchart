@@ -37,7 +37,7 @@ app.use('/highestpoints', function(req, res) {
     if(err){
       throw err;
     } else {
-      console.log('results are, ', results)
+      // console.log('results are, ', results)
       res.send(results)
     }
   })
@@ -66,7 +66,7 @@ app.use('/highestrebounds', function(req, res) {
     }
     ], function(err, results) {
       if(err) {throw err;} else {
-        console.log('results are ', results)
+        // console.log('results are ', results)
         res.send(results)
       }
     })
@@ -75,7 +75,7 @@ app.use('/highestrebounds', function(req, res) {
 app.use('/highestassists', function(req, res) {
   Event.aggregate([
     {$match:{
-      assist: {$exists:true}
+      assist: {$exists:true, $nin :[null]}
     }},
     {$group:{
       _id:"$assist",
@@ -95,7 +95,7 @@ app.use('/highestassists', function(req, res) {
     }
     ], function(err, results) {
       if(err) {throw err;} else {
-        console.log('results are ', results)
+        // console.log('results are ', results)
         res.send(results)
       }
     })
@@ -105,7 +105,7 @@ app.use('/highestassists', function(req, res) {
 app.use('/higheststeals', function(req, res) {
   Event.aggregate([
     {$match:{
-      steal: {$exists:true}
+      steal: {$exists:true, $nin :[null]}
     }},
     {$group:{
       _id:"$steal",
@@ -125,8 +125,8 @@ app.use('/higheststeals', function(req, res) {
     }
     ], function(err, results) {
       if(err) {throw err;} else {
-        console.log('results are ', results)
-        // res.send(results)
+        // console.log('results are ', results)
+        res.send(results)
       }
     })
 })
