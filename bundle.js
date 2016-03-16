@@ -19928,7 +19928,7 @@
 	          ),
 	          React.createElement(
 	            'a',
-	            { onClick: this.filterQuery.bind(this, 'hey'), href: '#' },
+	            { onClick: this.filterQuery, href: '#' },
 	            this.state.option2
 	          ),
 	          React.createElement(

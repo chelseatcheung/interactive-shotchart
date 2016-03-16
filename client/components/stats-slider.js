@@ -113,7 +113,7 @@ var Slider = React.createClass({
         </ul>
         <nav>
           <a onClick={this.filterQuery} href="#">{this.state.option1}</a>
-          <a onClick={this.filterQuery.bind(this, 'hey')} href="#">{this.state.option2}</a>
+          <a onClick={this.filterQuery} href="#">{this.state.option2}</a>
           <a onClick={this.filterQuery} href="#">{this.state.option3}</a>
           <a onClick={this.filterQuery} href="#">{this.state.option4}</a>
         </nav>
