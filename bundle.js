@@ -19750,6 +19750,11 @@
 	        'Highest Steals Per Game'
 	      ),
 	      React.createElement(
+	        'a',
+	        { onClick: this.filterQuery, href: '#' },
+	        'Click Me'
+	      ),
+	      React.createElement(
 	        'div',
 	        { id: 'mi-slider', className: 'mi-slider' },
 	        React.createElement(
@@ -19923,7 +19928,7 @@
 	          null,
 	          React.createElement(
 	            'a',
-	            { onClick: this.filterQuery, href: '#' },
+	            { href: '#' },
 	            this.state.option1
 	          ),
 	          React.createElement(

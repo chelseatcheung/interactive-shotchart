@@ -47,6 +47,7 @@
 
       var self = this;
       this.$navcategories.on( 'click.catslider', function() {
+        console.log('self is ', self);
         self.showCategory( $( this ).index() );
         return false;
       } );

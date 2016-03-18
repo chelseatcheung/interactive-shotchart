@@ -57,6 +57,7 @@ var Slider = React.createClass({
       <button onClick={this.highestRebounds}>Highest Rebounds Per Game</button>
       <button onClick={this.highestAssists}>Highest Assists Per Game</button>
       <button onClick={this.highestSteals}>Highest Steals Per Game</button>
+      <a onClick={this.filterQuery} href="#">Click Me</a>
       <div id="mi-slider" className="mi-slider">
         <ul>
           <li>
@@ -112,7 +113,7 @@ var Slider = React.createClass({
           <li>Briefcases</li>
         </ul>
         <nav>
-          <a onClick={this.filterQuery} href="#">{this.state.option1}</a>
+          <a href="#">{this.state.option1}</a>
           <a onClick={this.filterQuery} href="#">{this.state.option2}</a>
           <a onClick={this.filterQuery} href="#">{this.state.option3}</a>
           <a onClick={this.filterQuery} href="#">{this.state.option4}</a>
