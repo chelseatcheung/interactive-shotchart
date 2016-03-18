@@ -7,32 +7,33 @@ var connection = require('./database/connections.js');
 var Event = require('./database/models/Events.js');
 app.use(express.static(path.join(__dirname,'../')));
 var arrayOfObj;
+var controllers = ('./controllers/controllers.js')
 
 app.use('/highestpoints', function(req, res) {
-  Event.aggregate([
-    {$match:{
-      $or:[
-      {"num":{$gt:0}}, 
-      {"points":{$gt:0}}
-      ]
-    }},
-    {$group:{
-      _id: "$player", 
-      total_freethrows:{$sum:"$num"},
-      total_shots:{$sum:"$points"},
-      games:{$addToSet:"$game"},
-      teams: {$addToSet:"$team"}
-    }}, 
-    {$project: {
-      _id:true,
-      score: {$divide:[{$add:["$total_freethrows", "$total_shots"]}, {$size:"$games"}]},
-      teams: true
-    }},
-    {$sort:{
-      score: -1,
-    }},
-    {$limit:5
-    }
+    Event.aggregate([
+  {$match:{
+    $or:[
+    {"num":{$gt:0}}, 
+    {"points":{$gt:0}}
+    ]
+  }},
+  {$group:{
+    _id: "$player", 
+    total_freethrows:{$sum:"$num"},
+    total_shots:{$sum:"$points"},
+    games:{$addToSet:"$game"},
+    teams: {$addToSet:"$team"}
+  }}, 
+  {$project: {
+    _id:true,
+    score: {$divide:[{$add:["$total_freethrows", "$total_shots"]}, {$size:"$games"}]},
+    teams: true
+  }},
+  {$sort:{
+    score: -1,
+  }},
+  {$limit:5
+  }
   ], function(err, results) {
     if(err){
       throw err;
@@ -105,7 +106,7 @@ app.use('/highestassists', function(req, res) {
 app.use('/higheststeals', function(req, res) {
   Event.aggregate([
     {$match:{
-      steal: {$exists:true, $nin :[null]}
+      steal: {$exists:true}
     }},
     {$group:{
       _id:"$steal",
