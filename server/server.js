@@ -33,12 +33,15 @@ app.use('/highestpoints', function(req, res) {
     score: -1,
   }},
   {$limit:5
-  }
+  },
   ], function(err, results) {
     if(err){
       throw err;
     } else {
-      // console.log('results are, ', results)
+      results.map(function(index) {
+        var originalScore = index['score'].toString();
+        index['score'] = originalScore.substring(0, 4)
+      })
       res.send(results)
     }
   })
@@ -68,6 +71,10 @@ app.use('/highestrebounds', function(req, res) {
     ], function(err, results) {
       if(err) {throw err;} else {
         // console.log('results are ', results)
+      results.map(function(index) {
+        var originalScore = index['score'].toString();
+        index['score'] = originalScore.substring(0, 4)
+      })
         res.send(results)
       }
     })
@@ -96,6 +103,10 @@ app.use('/highestassists', function(req, res) {
     }
     ], function(err, results) {
       if(err) {throw err;} else {
+      results.map(function(index) {
+        var originalScore = index['score'].toString();
+        index['score'] = originalScore.substring(0, 4)
+      })
         // console.log('results are ', results)
         res.send(results)
       }
@@ -126,6 +137,10 @@ app.use('/higheststeals', function(req, res) {
     }
     ], function(err, results) {
       if(err) {throw err;} else {
+      results.map(function(index) {
+        var originalScore = index['score'].toString();
+        index['score'] = originalScore.substring(0, 4)
+      })
         // console.log('results are ', results)
         res.send(results)
       }
