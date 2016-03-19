@@ -3,6 +3,11 @@
   src: url('../fonts/avenir-book.ttf');
 }
 
+@font-face {
+  font-family: bebas-neue;
+  src: url('../fonts/BebasNeue.otf');
+}
+
 .mi-slider {
   position: relative;
   margin-top: 30px;
@@ -65,7 +70,7 @@
 
 .mi-slider ul li {
   display: inline-block;
-  font-family: avenir, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  font-family: "Helvetica Neue", avenir, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
   /*font-style: italic;*/
   font-weight: 400;
   font-size: 18px;

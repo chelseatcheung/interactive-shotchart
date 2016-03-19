@@ -17,7 +17,7 @@ var Slider = React.createClass({
       stats2: {},
       stats3: {},
       stats4: {},
-      stats5: {}
+      stats5: {},
     }
   },
   componentDidMount: function() {

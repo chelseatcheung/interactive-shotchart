@@ -48,8 +48,6 @@
       var self = this;
       this.$navcategories.on( 'click.catslider', function() {
 
-        window.localStorage.setItem('current', this.innerHTML);
-
         // console.log('this is ', this.innerHTML);
         self.showCategory( $( this ).index() );
         return false;

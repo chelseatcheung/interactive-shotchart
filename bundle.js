@@ -46,19 +46,21 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var Slider = __webpack_require__(159);
+	// var Slider = require('./stats-slider.js');
+	var ArrowButtons = __webpack_require__(159);
+	// var SliderTwo = require('./slider-two.js');
+	// var SliderThree = require('./slider-three.js');
+	var MainSlider = __webpack_require__(160);
 
 	var Main = React.createClass({
 	  displayName: 'Main',
 
-	  // getInitialState() {
-
-	  // }
 	  render: function () {
 	    return React.createElement(
 	      'div',
 	      { className: 'main-container' },
-	      React.createElement(Slider, null)
+	      React.createElement(MainSlider, null),
+	      React.createElement(ArrowButtons, null)
 	    );
 	  }
 	});
@@ -19671,12 +19673,89 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var $ = __webpack_require__(160);
-	var playerImgs = __webpack_require__(161);
-	var HighestPoints = __webpack_require__(162);
-	var HighestRebounds = __webpack_require__(163);
-	var HighestAssists = __webpack_require__(164);
-	var HighestSteals = __webpack_require__(165);
+	// var views = [view1, view2, view3]
+
+	var ArrowButtons = React.createClass({
+	  displayName: 'ArrowButtons',
+
+	  componentDidMount: function () {
+	    window.localStorage.setItem('sliderview', 0);
+	  },
+	  changeViews: function () {
+	    var storage = localStorage.getItem('sliderview');
+	    if (storage < '2') {
+	      localStorage.setItem('sliderview', parseInt(localStorage.getItem('sliderview')) + 1);
+	    } else if (storage === '3') {
+	      localStorage.setItem('sliderview', 0);
+	    }
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement('i', { onClick: this.changeViews, className: 'fa fa-arrow-circle-left fa-4x' }),
+	      React.createElement('i', { onClick: this.changeViews, className: 'fa fa-arrow-circle-right fa-4x' })
+	    );
+	  }
+	});
+
+	module.exports = ArrowButtons;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var Slider = __webpack_require__(161);
+	var SliderTwo = __webpack_require__(168);
+	var SliderThree = __webpack_require__(169);
+
+	var MainSlider = React.createClass({
+	  displayName: 'MainSlider',
+
+	  getInitialState: function () {
+	    return {
+	      viewOne: true,
+	      viewTwo: false,
+	      viewThree: false
+	    };
+	  },
+	  render: function () {
+	    if (this.state.viewOne) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(Slider, null)
+	      );
+	    } else if (this.state.viewTwo) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(SliderTwo, null)
+	      );
+	    } else {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(SliderThree, null)
+	      );
+	    }
+	  }
+	});
+
+	module.exports = MainSlider;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var $ = __webpack_require__(162);
+	var playerImgs = __webpack_require__(163);
+	var HighestPoints = __webpack_require__(164);
+	var HighestRebounds = __webpack_require__(165);
+	var HighestAssists = __webpack_require__(166);
+	var HighestSteals = __webpack_require__(167);
 
 	var Slider = React.createClass({
 	  displayName: 'Slider',
@@ -19825,7 +19904,7 @@
 	module.exports = Slider;
 
 /***/ },
-/* 160 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -29662,7 +29741,7 @@
 
 
 /***/ },
-/* 161 */
+/* 163 */
 /***/ function(module, exports) {
 
 	var playerImgs = {
@@ -29689,11 +29768,11 @@
 	module.exports = playerImgs;
 
 /***/ },
-/* 162 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(161);
+	var playerImgs = __webpack_require__(163);
 
 	var HighestPoints = React.createClass({
 	  displayName: 'HighestPoints',
@@ -29784,11 +29863,11 @@
 	module.exports = HighestPoints;
 
 /***/ },
-/* 163 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(161);
+	var playerImgs = __webpack_require__(163);
 
 	var HighestRebounds = React.createClass({
 	  displayName: 'HighestRebounds',
@@ -29879,11 +29958,11 @@
 	module.exports = HighestRebounds;
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(161);
+	var playerImgs = __webpack_require__(163);
 
 	var HighestAssists = React.createClass({
 	  displayName: 'HighestAssists',
@@ -29974,11 +30053,11 @@
 	module.exports = HighestAssists;
 
 /***/ },
-/* 165 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(161);
+	var playerImgs = __webpack_require__(163);
 
 	var HighestSteals = React.createClass({
 	  displayName: 'HighestSteals',
@@ -30067,6 +30146,46 @@
 	});
 
 	module.exports = HighestSteals;
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var SliderTwo = React.createClass({
+	  displayName: 'SliderTwo',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'SLIDER TWO'
+	    );
+	  }
+	});
+
+	module.exports = SliderTwo;
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var SliderThree = React.createClass({
+	  displayName: 'SliderThree',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'SLIDER THREE'
+	    );
+	  }
+	});
+
+	module.exports = SliderThree;
 
 /***/ }
 /******/ ]);

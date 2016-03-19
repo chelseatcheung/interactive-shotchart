@@ -3,6 +3,11 @@
   src: url('../fonts/Avenir-LT-65-Medium.ttf');
 }
 
+@font-face {
+  font-family: bebas-neue;
+  src: url('../fonts/BebasNeue.otf');
+}
+
 .main-header {
   padding-top:10px;
   padding-left:20px;
@@ -14,4 +19,9 @@
 
 .player-name {
   color: #e54b4b;
+  letter-spacing: 3px;
+  font-family:"Helvetica Neue";
+  text-transform: uppercase;
+  /*font-family: bebas-neue;*/
+  font-size:16px;
 }
