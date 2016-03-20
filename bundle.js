@@ -59,7 +59,6 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'main-container' },
-	      React.createElement(MainSlider, null),
 	      React.createElement(ArrowButtons, null)
 	    );
 	  }
@@ -19673,28 +19672,59 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var MainSlider = __webpack_require__(160);
 	// var views = [view1, view2, view3]
 
 	var ArrowButtons = React.createClass({
 	  displayName: 'ArrowButtons',
 
+	  getInitialState: function () {
+	    return {
+	      sliderView: 'sliderOne'
+	    };
+	  },
 	  componentDidMount: function () {
 	    window.localStorage.setItem('sliderview', 0);
 	  },
-	  changeViews: function () {
-	    var storage = localStorage.getItem('sliderview');
-	    if (storage < '2') {
+	  changeRight: function () {
+	    var views = ['sliderOne', 'sliderTwo', 'sliderThree'];
+	    var oldStorage = localStorage.getItem('sliderview');
+
+	    if (oldStorage < '2') {
 	      localStorage.setItem('sliderview', parseInt(localStorage.getItem('sliderview')) + 1);
-	    } else if (storage === '3') {
+	    } else if (oldStorage === '2') {
 	      localStorage.setItem('sliderview', 0);
 	    }
+
+	    var newStorage = localStorage.getItem('sliderview');
+
+	    this.setState({
+	      sliderView: views[newStorage]
+	    });
+	  },
+	  changeLeft: function () {
+	    var views = ['sliderOne', 'sliderTwo', 'sliderThree'];
+	    var oldStorage = localStorage.getItem('sliderview');
+
+	    if (oldStorage > '0') {
+	      localStorage.setItem('sliderview', parseInt(localStorage.getItem('sliderview')) - 1);
+	    } else if (oldStorage === '0') {
+	      localStorage.setItem('sliderview', 2);
+	    }
+
+	    var newStorage = localStorage.getItem('sliderview');
+
+	    this.setState({
+	      sliderView: views[newStorage]
+	    });
 	  },
 	  render: function () {
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement('i', { onClick: this.changeViews, className: 'fa fa-arrow-circle-left fa-4x' }),
-	      React.createElement('i', { onClick: this.changeViews, className: 'fa fa-arrow-circle-right fa-4x' })
+	      React.createElement('i', { onClick: this.changeLeft, className: 'fa fa-arrow-circle-left fa-4x' }),
+	      React.createElement('i', { onClick: this.changeRight, className: 'fa fa-arrow-circle-right fa-4x' }),
+	      React.createElement(MainSlider, { sliderView: this.state.sliderView })
 	    );
 	  }
 	});
@@ -19709,40 +19739,38 @@
 	var Slider = __webpack_require__(161);
 	var SliderTwo = __webpack_require__(168);
 	var SliderThree = __webpack_require__(169);
+	var $ = __webpack_require__(162);
 
 	var MainSlider = React.createClass({
 	  displayName: 'MainSlider',
 
-	  getInitialState: function () {
-	    return {
-	      viewOne: true,
-	      viewTwo: false,
-	      viewThree: false
-	    };
-	  },
+	  // getInitialState: function() {
+	  //   return {
+	  //   sliderView: this.props.sliderView
+	  //   }
+	  // },
 	  render: function () {
-	    if (this.state.viewOne) {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(Slider, null)
-	      );
-	    } else if (this.state.viewTwo) {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(SliderTwo, null)
-	      );
-	    } else {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(SliderThree, null)
-	      );
+	    switch (this.props.sliderView) {
+	      case 'sliderOne':
+	        return React.createElement(Slider, null);
+	        break;
+	      case 'sliderTwo':
+	        return React.createElement(SliderTwo, null);
+	        break;
+	      case 'sliderThree':
+	        return React.createElement(SliderThree, null);
+	        break;
 	    }
 	  }
 	});
 
+	// if(this.state.viewOne) {
+	//   return (<div><Slider/></div>)
+	// } else if (this.state.viewTwo) {
+	//   return (<div><SliderTwo/></div>)
+	// } else {
+	//   return (<div><SliderThree/></div>)
+	// }
 	module.exports = MainSlider;
 
 /***/ },
