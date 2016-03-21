@@ -46,10 +46,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	// var Slider = require('./stats-slider.js');
 	var ArrowButtons = __webpack_require__(159);
-	// var SliderTwo = require('./slider-two.js');
-	// var SliderThree = require('./slider-three.js');
 	var MainSlider = __webpack_require__(160);
 
 	var Main = React.createClass({
@@ -19736,23 +19733,18 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var Slider = __webpack_require__(161);
-	var SliderTwo = __webpack_require__(168);
-	var SliderThree = __webpack_require__(169);
+	var SliderOne = __webpack_require__(161);
+	var SliderTwo = __webpack_require__(163);
+	var SliderThree = __webpack_require__(164);
 	var $ = __webpack_require__(162);
 
 	var MainSlider = React.createClass({
 	  displayName: 'MainSlider',
 
-	  // getInitialState: function() {
-	  //   return {
-	  //   sliderView: this.props.sliderView
-	  //   }
-	  // },
 	  render: function () {
 	    switch (this.props.sliderView) {
 	      case 'sliderOne':
-	        return React.createElement(Slider, null);
+	        return React.createElement(SliderOne, null);
 	        break;
 	      case 'sliderTwo':
 	        return React.createElement(SliderTwo, null);
@@ -19764,13 +19756,6 @@
 	  }
 	});
 
-	// if(this.state.viewOne) {
-	//   return (<div><Slider/></div>)
-	// } else if (this.state.viewTwo) {
-	//   return (<div><SliderTwo/></div>)
-	// } else {
-	//   return (<div><SliderThree/></div>)
-	// }
 	module.exports = MainSlider;
 
 /***/ },
@@ -19779,11 +19764,11 @@
 
 	var React = __webpack_require__(1);
 	var $ = __webpack_require__(162);
-	var playerImgs = __webpack_require__(163);
-	var HighestPoints = __webpack_require__(164);
-	var HighestRebounds = __webpack_require__(165);
-	var HighestAssists = __webpack_require__(166);
-	var HighestSteals = __webpack_require__(167);
+	var playerImgs = __webpack_require__(166);
+	var HighestPoints = __webpack_require__(165);
+	var HighestRebounds = __webpack_require__(167);
+	var HighestAssists = __webpack_require__(168);
+	var HighestSteals = __webpack_require__(169);
 
 	var Slider = React.createClass({
 	  displayName: 'Slider',
@@ -19823,7 +19808,7 @@
 	  },
 	  highestPoints: function () {
 	    $.get('/highestpoints', function (results) {
-	      console.log('results are ', results);
+	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[0],
 	        stats2: results[1],
@@ -19835,7 +19820,7 @@
 	  },
 	  highestRebounds: function () {
 	    $.get('/highestrebounds', function (results) {
-	      console.log('results are ', results);
+	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[1],
 	        stats2: results[2],
@@ -19847,7 +19832,7 @@
 	  },
 	  highestAssists: function () {
 	    $.get('/highestassists', function (results) {
-	      console.log('results are ', results);
+	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[1],
 	        stats2: results[2],
@@ -19859,7 +19844,7 @@
 	  },
 	  highestSteals: function () {
 	    $.get('/higheststeals', function (results) {
-	      console.log('results are ', results);
+	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[1],
 	        stats2: results[2],
@@ -29770,37 +29755,188 @@
 
 /***/ },
 /* 163 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var playerImgs = {
-	  'Kevin Martin': 'http://l.yimg.com/bt/api/res/1.2/NN7Vr0lFsVQVQ1sEzQ78JQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3843.png',
-	  'Dwyane Wade': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1987.png&w=350&h=254',
-	  'Carmelo Anthony': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1975.png&w=350&h=254',
-	  'LeBron James': 'http://forums.nba-live.com/dl_mod/thumbs/3638_MIA_James_LeBron.png',
-	  'Kobe Bryant': 'http://www.financialnewsusa.com/wp-content/uploads/2014/12/1101.png',
-	  'Joakim Noah': 'http://2008-09chicagobulls.weebly.com/uploads/2/5/0/3/25039641/2762106_orig.png',
-	  'Pau Gasol': 'http://l.yimg.com/bt/api/res/1.2/zGHb.TGQsuQT.d_OvaJ7Kw--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3513.png',
-	  'Antawn Jamison': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/385.png&w=350&h=254',
-	  'Marcus Camby': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/125.png',
-	  'Chris Bosh': 'http://2.bp.blogspot.com/-HU7mE29kBcQ/VNKN1t-4ALI/AAAAAAAAA3g/HnlkI60-7J4/s1600/i.png',
-	  'Steve Nash': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/592.png&w=350&h=254',
-	  'Chris Paul': 'http://forums.nba-live.com/dl_mod/thumbs/5646_LAC_Paul_Chris.png',
-	  'Deron Williams': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2798.png&w=350&h=254',
-	  'Jason Kidd': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/429.png&w=350&h=254',
-	  'Rajon Rondo': 'http://l.yimg.com/bt/api/res/1.2/y1bIFeYEaBgCNzAxjsJgIQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4149.png',
-	  'Courtney Lee': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3445.png&w=350&h=254',
-	  'Acie Law': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3219.png&w=350&h=254',
-	  'Danny Granger': 'http://www.hoopsmack.com/wp-content/uploads/2014/01/D.-Granger-headshot.png'
-	};
+	var React = __webpack_require__(1);
+	var $ = __webpack_require__(162);
+	var playerImgs = __webpack_require__(166);
+	var FieldGoals = __webpack_require__(170);
+	var FreeThrows = __webpack_require__(171);
+	var ThreePoints = __webpack_require__(172);
+	var HighestBlocks = __webpack_require__(173);
 
-	module.exports = playerImgs;
+	var SliderTwo = React.createClass({
+	  displayName: 'SliderTwo',
+
+	  getInitialState: function () {
+	    return {
+	      option1: 'Field Goal %',
+	      option2: 'Free Throw %',
+	      option3: 'Three Points %',
+	      option4: 'Blocks Per Game',
+	      stats1: {},
+	      stats2: {},
+	      stats3: {},
+	      stats4: {},
+	      stats5: {}
+	    };
+	  },
+	  componentDidMount: function () {
+	    this.fieldGoal();
+	    var that = this;
+	    $('.options').on('click', function () {
+	      var selection = this.innerHTML;
+	      that.filterQuery(selection);
+	    });
+	  },
+
+	  filterQuery: function (option) {
+	    if (option === this.state.option1) {
+	      this.fieldGoal();
+	    } else if (option === this.state.option2) {
+	      this.freeThrow();
+	    } else if (option === this.state.option3) {
+	      this.threePoints();
+	    } else if (option === this.state.option4) {
+	      this.highestBlocks();
+	    }
+	  },
+	  fieldGoal: function () {
+	    $.get('/fieldgoals', function (results) {
+	      console.log('results are ', results);
+	      this.setState({
+	        stats1: results[0],
+	        stats2: results[1],
+	        stats3: results[2],
+	        stats4: results[3],
+	        stats5: results[4]
+	      });
+	    }.bind(this));
+	  },
+	  freeThrow: function () {
+	    $.get('/freethrows', function (results) {
+	      console.log('results are ', results);
+	      this.setState({
+	        stats1: results[0],
+	        stats2: results[1],
+	        stats3: results[2],
+	        stats4: results[3],
+	        stats5: results[4]
+	      });
+	    }.bind(this));
+	  },
+	  threePoints: function () {
+	    $.get('/threepoints', function (results) {
+	      console.log('results are ', results);
+	      this.setState({
+	        stats1: results[1],
+	        stats2: results[2],
+	        stats3: results[3],
+	        stats4: results[4],
+	        stats5: results[5]
+	      });
+	    }.bind(this));
+	  },
+	  highestBlocks: function () {
+	    $.get('/highestblocks', function (results) {
+	      console.log('results are ', results);
+	      this.setState({
+	        stats1: results[1],
+	        stats2: results[2],
+	        stats3: results[3],
+	        stats4: results[4],
+	        stats5: results[5]
+	      });
+	    }.bind(this));
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'div',
+	        { id: 'mi-slider', className: 'mi-slider' },
+	        React.createElement(FieldGoals, {
+	          stats1: this.state.stats1,
+	          stats2: this.state.stats2,
+	          stats3: this.state.stats3,
+	          stats4: this.state.stats4,
+	          stats5: this.state.stats5 }),
+	        React.createElement(FreeThrows, {
+	          stats1: this.state.stats1,
+	          stats2: this.state.stats2,
+	          stats3: this.state.stats3,
+	          stats4: this.state.stats4,
+	          stats5: this.state.stats5 }),
+	        React.createElement(ThreePoints, {
+	          stats1: this.state.stats1,
+	          stats2: this.state.stats2,
+	          stats3: this.state.stats3,
+	          stats4: this.state.stats4,
+	          stats5: this.state.stats5 }),
+	        React.createElement(HighestBlocks, {
+	          stats1: this.state.stats1,
+	          stats2: this.state.stats2,
+	          stats3: this.state.stats3,
+	          stats4: this.state.stats4,
+	          stats5: this.state.stats5 }),
+	        React.createElement(
+	          'nav',
+	          null,
+	          React.createElement(
+	            'a',
+	            { className: 'options', href: '#' },
+	            this.state.option1
+	          ),
+	          React.createElement(
+	            'a',
+	            { className: 'options', href: '#' },
+	            this.state.option2
+	          ),
+	          React.createElement(
+	            'a',
+	            { className: 'options', href: '#' },
+	            this.state.option3
+	          ),
+	          React.createElement(
+	            'a',
+	            { className: 'options', href: '#' },
+	            this.state.option4
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = SliderTwo;
 
 /***/ },
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(163);
+
+	var SliderThree = React.createClass({
+	  displayName: 'SliderThree',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      'SLIDER THREE'
+	    );
+	  }
+	});
+
+	module.exports = SliderThree;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(166);
 
 	var HighestPoints = React.createClass({
 	  displayName: 'HighestPoints',
@@ -29891,11 +30027,38 @@
 	module.exports = HighestPoints;
 
 /***/ },
-/* 165 */
+/* 166 */
+/***/ function(module, exports) {
+
+	var playerImgs = {
+	  'Kevin Martin': 'http://l.yimg.com/bt/api/res/1.2/NN7Vr0lFsVQVQ1sEzQ78JQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3843.png',
+	  'Dwyane Wade': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1987.png&w=350&h=254',
+	  'Carmelo Anthony': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1975.png&w=350&h=254',
+	  'LeBron James': 'http://forums.nba-live.com/dl_mod/thumbs/3638_MIA_James_LeBron.png',
+	  'Kobe Bryant': 'http://www.financialnewsusa.com/wp-content/uploads/2014/12/1101.png',
+	  'Joakim Noah': 'http://2008-09chicagobulls.weebly.com/uploads/2/5/0/3/25039641/2762106_orig.png',
+	  'Pau Gasol': 'http://l.yimg.com/bt/api/res/1.2/zGHb.TGQsuQT.d_OvaJ7Kw--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3513.png',
+	  'Antawn Jamison': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/385.png&w=350&h=254',
+	  'Marcus Camby': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/125.png',
+	  'Chris Bosh': 'http://2.bp.blogspot.com/-HU7mE29kBcQ/VNKN1t-4ALI/AAAAAAAAA3g/HnlkI60-7J4/s1600/i.png',
+	  'Steve Nash': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/592.png&w=350&h=254',
+	  'Chris Paul': 'http://forums.nba-live.com/dl_mod/thumbs/5646_LAC_Paul_Chris.png',
+	  'Deron Williams': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2798.png&w=350&h=254',
+	  'Jason Kidd': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/429.png&w=350&h=254',
+	  'Rajon Rondo': 'http://l.yimg.com/bt/api/res/1.2/y1bIFeYEaBgCNzAxjsJgIQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4149.png',
+	  'Courtney Lee': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3445.png&w=350&h=254',
+	  'Acie Law': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3219.png&w=350&h=254',
+	  'Danny Granger': 'http://www.hoopsmack.com/wp-content/uploads/2014/01/D.-Granger-headshot.png'
+	};
+
+	module.exports = playerImgs;
+
+/***/ },
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(163);
+	var playerImgs = __webpack_require__(166);
 
 	var HighestRebounds = React.createClass({
 	  displayName: 'HighestRebounds',
@@ -29986,11 +30149,11 @@
 	module.exports = HighestRebounds;
 
 /***/ },
-/* 166 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(163);
+	var playerImgs = __webpack_require__(166);
 
 	var HighestAssists = React.createClass({
 	  displayName: 'HighestAssists',
@@ -30081,11 +30244,11 @@
 	module.exports = HighestAssists;
 
 /***/ },
-/* 167 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(163);
+	var playerImgs = __webpack_require__(166);
 
 	var HighestSteals = React.createClass({
 	  displayName: 'HighestSteals',
@@ -30176,44 +30339,404 @@
 	module.exports = HighestSteals;
 
 /***/ },
-/* 168 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(166);
 
-	var SliderTwo = React.createClass({
-	  displayName: 'SliderTwo',
+	var FieldGoals = React.createClass({
+	  displayName: 'FieldGoals',
 
 	  render: function () {
 	    return React.createElement(
-	      'div',
+	      'ul',
 	      null,
-	      'SLIDER TWO'
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats1["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats1["teams"],
+	        React.createElement('br', null),
+	        this.props.stats1["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats2["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats2["teams"],
+	        React.createElement('br', null),
+	        this.props.stats2["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats3["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats3["teams"],
+	        React.createElement('br', null),
+	        this.props.stats3["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats4["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats4["teams"],
+	        React.createElement('br', null),
+	        this.props.stats4["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats5["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats5["teams"],
+	        React.createElement('br', null),
+	        this.props.stats5["score"],
+	        '%'
+	      )
 	    );
 	  }
 	});
 
-	module.exports = SliderTwo;
+	module.exports = FieldGoals;
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(166);
 
-	var SliderThree = React.createClass({
-	  displayName: 'SliderThree',
+	var FreeThrows = React.createClass({
+	  displayName: 'FreeThrows',
 
 	  render: function () {
 	    return React.createElement(
-	      'div',
+	      'ul',
 	      null,
-	      'SLIDER THREE'
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats1["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats1["teams"],
+	        React.createElement('br', null),
+	        this.props.stats1["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats2["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats2["teams"],
+	        React.createElement('br', null),
+	        this.props.stats2["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats3["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats3["teams"],
+	        React.createElement('br', null),
+	        this.props.stats3["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats4["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats4["teams"],
+	        React.createElement('br', null),
+	        this.props.stats4["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats5["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats5["teams"],
+	        React.createElement('br', null),
+	        this.props.stats5["score"],
+	        '%'
+	      )
 	    );
 	  }
 	});
 
-	module.exports = SliderThree;
+	module.exports = FreeThrows;
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(166);
+
+	var ThreePoints = React.createClass({
+	  displayName: 'ThreePoints',
+
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats1["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats1["teams"],
+	        React.createElement('br', null),
+	        this.props.stats1["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats2["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats2["teams"],
+	        React.createElement('br', null),
+	        this.props.stats2["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats3["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats3["teams"],
+	        React.createElement('br', null),
+	        this.props.stats3["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats4["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats4["teams"],
+	        React.createElement('br', null),
+	        this.props.stats4["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats5["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats5["teams"],
+	        React.createElement('br', null),
+	        this.props.stats5["score"],
+	        '%'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = ThreePoints;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(166);
+
+	var HighestBlocks = React.createClass({
+	  displayName: 'HighestBlocks',
+
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats1["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats1["teams"],
+	        React.createElement('br', null),
+	        this.props.stats1["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats2["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats2["teams"],
+	        React.createElement('br', null),
+	        this.props.stats2["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats3["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats3["teams"],
+	        React.createElement('br', null),
+	        this.props.stats3["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats4["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats4["teams"],
+	        React.createElement('br', null),
+	        this.props.stats4["score"],
+	        '%'
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats5["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: ',
+	        this.props.stats5["teams"],
+	        React.createElement('br', null),
+	        this.props.stats5["score"],
+	        '%'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = HighestBlocks;
 
 /***/ }
 /******/ ]);

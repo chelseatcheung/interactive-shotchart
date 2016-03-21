@@ -147,6 +147,90 @@ app.use('/higheststeals', function(req, res) {
     })
 })
 
+app.use('/fieldgoals', function(req, res) {
+  Event.aggregate([
+    {$match:{
+      "etype":"shot"
+    }},
+    {$group: {
+      _id:"$player",
+      shots:{$push:"$result"},
+      teams: {$addToSet:"$team"},
+    }},
+    {$project: {
+      _id:true,
+      score:{$multiply:[{$divide:[{$size:{$filter:{
+        input:"$shots",
+        as:"shot",
+        cond:{$eq:["$$shot","made"]}
+      }}}, {$size:"$shots"}]}, 100]},
+      teams: true
+    }},
+    {$sort: {
+      score: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {
+        throw err; 
+      } else {
+        results.map(function(index) {
+          var originalScore = index['score'].toString();
+          index['score'] = originalScore.substring(0, 4)
+        })
+        res.send(results)
+        // console.log('results are ', results)
+
+      }
+    })
+})
+
+// total_freethrows:{$sum:"$num"},
+app.use('/freethrows', function(req, res) {
+  Event.aggregate([
+    {$match:{
+      "etype":"free throw"
+    }},
+    {$group: {
+      _id:"$player",
+      shots: {$sum:"$num"},
+      attempts: {$sum:"$outof"},
+      teams: {$addToSet:"$team"},
+    }},
+    {$project: {
+      _id:true,
+      score:{$multiply:[{$divide:["$shots","$attempts"]}, 100]},
+      teams: true
+    }},
+    {$sort: {
+      score: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {
+        throw err; 
+      } else {
+        results.map(function(index) {
+          var originalScore = index['score'].toString();
+          index['score'] = originalScore.substring(0, 4)
+        })
+        res.send(results)
+        // console.log('results are ', results)
+
+      }
+    })
+})
+
+app.use('/threepoints', function(req, res) {
+  console.log('hi');
+})
+
+app.use('/highestblocks', function(req, res) {
+  console.log('hi');
+})
+
 //function that creates the docs
 //had to add them in increments or else server would crash, hence the specific number in the for loop
 function createDocs () {

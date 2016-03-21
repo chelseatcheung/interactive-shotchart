@@ -1,10 +1,10 @@
 var React = require('react');
 var $ = require('jquery');
-var playerImgs = require('../assets/playerimages.js');
-var HighestPoints = require('./slider-options/highestpoints.js');
-var HighestRebounds = require('./slider-options/highestrebounds.js');
-var HighestAssists = require('./slider-options/highestassists.js');
-var HighestSteals = require('./slider-options/higheststeals.js');
+var playerImgs = require('../../assets/playerimages.js');
+var HighestPoints = require('../slider-options/highestpoints.js');
+var HighestRebounds = require('../slider-options/highestrebounds.js');
+var HighestAssists = require('../slider-options/highestassists.js');
+var HighestSteals = require('../slider-options/higheststeals.js');
 
 var Slider = React.createClass({
   getInitialState: function() {
@@ -42,7 +42,7 @@ var Slider = React.createClass({
   },
   highestPoints: function() {
     $.get('/highestpoints', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[0],
         stats2: results[1],
@@ -54,7 +54,7 @@ var Slider = React.createClass({
   },
   highestRebounds: function() {
     $.get('/highestrebounds', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],
@@ -66,7 +66,7 @@ var Slider = React.createClass({
   },
   highestAssists: function() {
     $.get('/highestassists', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],
@@ -78,7 +78,7 @@ var Slider = React.createClass({
   },
   highestSteals: function() {
     $.get('/higheststeals', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],
