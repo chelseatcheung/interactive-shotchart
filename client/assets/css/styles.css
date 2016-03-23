@@ -4,24 +4,51 @@
 }
 
 @font-face {
+  font-family: avenir-heavy;
+  src: url('../fonts/Avenir-LT-85-Heavy.ttf');
+}
+
+@font-face {
   font-family: bebas-neue;
   src: url('../fonts/BebasNeue.otf');
 }
 
 .main-header {
-  padding-top:10px;
+  padding-top:30px;
   padding-left:20px;
   font-family: 'Open Sans', sans-serif;
   font-weight:700;
   font-size: 30px;
+  text-align:center;
+  text-decoration:underline;
+}
+
+.shot {
+  color:#e54b4b;
+}
+
+.chart {
+  color:#504dd0;
 }
 
 
 .player-name {
-  color: #e54b4b;
-  letter-spacing: 3px;
-  font-family:"Helvetica Neue";
-  text-transform: uppercase;
-  /*font-family: bebas-neue;*/
-  font-size:16px;
+  padding-top:10px;
+  font-family: avenir-heavy;
+  font-size:17px;
+}
+
+.fa {
+  margin-top: 275px;
+}
+
+.fa:hover {
+  cursor:pointer;
+  color:#e54b4b;
+}
+
+.rating {
+  font-size: 36px;
+  font-family: avenir-heavy;
+  /*color: #7b7aa5;*/
 }

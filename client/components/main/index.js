@@ -7,7 +7,8 @@ var Main = React.createClass({
   render: function() {
     return (
       <div className="main-container">
-      <ArrowButtons/>
+        <div className="main-header">NBA <span className="shot">SHOT</span><span className="chart">CHART</span></div>
+        <ArrowButtons/>
       </div>
       )
   }

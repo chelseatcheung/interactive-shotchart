@@ -5,6 +5,7 @@ var FieldGoals = require('../slider-options/fieldgoals.js');
 var FreeThrows = require('../slider-options/freethrows.js');
 var ThreePoints = require('../slider-options/threepoints.js');
 var HighestBlocks = require('../slider-options/highestblocks.js');
+var itemslider = require('../../assets/animation/itemslider.js');
 
 var SliderTwo = React.createClass({
   getInitialState: function() {
@@ -21,6 +22,9 @@ var SliderTwo = React.createClass({
     }
   },
   componentDidMount: function() {
+    // $(function() {
+    //   $( '#mi-slider' ).itemslider.catslider();
+    // });
     this.fieldGoal();   
     var that = this;
     $('.options').on('click', function() {
@@ -42,7 +46,7 @@ var SliderTwo = React.createClass({
   },
   fieldGoal: function() {
     $.get('/fieldgoals', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[0],
         stats2: results[1],
@@ -54,7 +58,7 @@ var SliderTwo = React.createClass({
   },
   freeThrow: function() {
     $.get('/freethrows', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[0],
         stats2: results[1],
@@ -66,7 +70,7 @@ var SliderTwo = React.createClass({
   },
   threePoints: function() {
     $.get('/threepoints', function(results) {
-      console.log('results are ', results)
+      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],
@@ -78,7 +82,7 @@ var SliderTwo = React.createClass({
   },
   highestBlocks: function() {
     $.get('/highestblocks', function(results) {
-      console.log('results are ', results)
+      console.log('highestblocks results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],

@@ -1,6 +1,6 @@
 var React = require('react');
 var MainSlider = require('./main-slider.js');
-// var views = [view1, view2, view3]
+
 
 
 var ArrowButtons = React.createClass({
@@ -23,7 +23,6 @@ var ArrowButtons = React.createClass({
     }
 
     var newStorage = localStorage.getItem('sliderview');
-
     this.setState({
       sliderView: views[newStorage]
     })
@@ -47,9 +46,17 @@ var ArrowButtons = React.createClass({
   render: function() {
     return (
       <div>
-      <i onClick={this.changeLeft} className="fa fa-arrow-circle-left fa-4x"></i>
-      <i onClick={this.changeRight} className="fa fa-arrow-circle-right fa-4x"></i>
-      <MainSlider sliderView={this.state.sliderView}/>
+      <div className="row">
+        <div className="col-sm-1">
+          <i onClick={this.changeLeft} className="fa fa-arrow-circle-left fa-4x"></i>
+        </div>
+        <div className="col-md-10">
+          <MainSlider sliderView={this.state.sliderView}/>
+        </div>
+        <div className="col-sm-1">
+          <i onClick={this.changeRight} className="fa fa-arrow-circle-right fa-4x"></i>
+        </div>
+      </div>
       </div>
     )
   }

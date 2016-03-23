@@ -52,6 +52,7 @@
 
 .mi-slider ul li a,
 .mi-slider ul li img {
+  padding-bottom:10px;
   width:190px;
   height:130px;
   display: block;
@@ -70,10 +71,11 @@
 
 .mi-slider ul li {
   display: inline-block;
-  font-family: "Helvetica Neue", avenir, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  font-family: avenir, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
   /*font-style: italic;*/
-  font-weight: 400;
-  font-size: 18px;
+  /*font-weight: 400;*/
+  text-transform: uppercase;
+  font-size: 15px;
   /*padding: -20px;*/
 }
 

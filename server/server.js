@@ -224,12 +224,112 @@ app.use('/freethrows', function(req, res) {
 })
 
 app.use('/threepoints', function(req, res) {
-  console.log('hi');
+  Event.aggregate([
+    {$match:{
+      "type":"3pt"
+    }},
+    {$group: {
+      _id:"$player",
+      shots:{$push:"$result"},
+      // shots:{$push:"$type"},
+      teams: {$addToSet:"$team"},
+    }},
+    {$project: {
+    _id:true,
+    score:{$multiply:[{$divide:[{$size:{$filter:{
+      input:"$shots",
+      as:"shot",
+      cond:{$eq:["$$shot","made"]}
+    }}}, {$size:"$shots"}]}, 100]},
+    teams: true
+    }},
+    {$sort: {
+      score: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {
+        throw err; 
+      } else {
+        results.map(function(index) {
+          var originalScore = index['score'].toString();
+          index['score'] = originalScore.substring(0, 4)
+        })
+        res.send(results)
+        // console.log('results are ', results)
+
+      }
+    })
 })
 
 app.use('/highestblocks', function(req, res) {
-  console.log('hi');
+  Event.aggregate([
+    {$match: {
+      block: {$exists:true, $nin :[null]}
+    }},
+    {$group:{
+      _id:"$block",
+      total_blocks: {$push:"$block"},
+      games:{$addToSet:"$game"},
+      teams:{$addToSet:"$team"}
+    }},
+    {$project: {
+      _id:true,
+      score: {$divide:[{$size:"$total_blocks"},{$size:"$games"}]},
+      teams:true
+    }},
+    {$sort: {
+      score: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {throw err;} else {
+      results.map(function(index) {
+        var originalScore = index['score'].toString();
+        index['score'] = originalScore.substring(0, 4)
+      })
+      // console.log('results are ', results)
+        res.send(results)
+      }
+    })
 })
+
+// app.use('/highestassists', function(req, res) {
+//   Event.aggregate([
+//     {$match:{
+//       assist: {$exists:true, $nin :[null]}
+//     }},
+//     {$group:{
+//       _id:"$assist",
+//       total_assists: {$push: "$assist"},
+//       games:{$addToSet:"$game"},
+//       teams: {$addToSet: "$team"}
+//     }},
+//     {$project: {
+//       _id:true,
+//       score: {$divide:[{$size:"$total_assists"},{$size:"$games"}]},
+//       teams:true
+//     }},
+//     {$sort: {
+//       score: -1
+//     }},
+//     {$limit:6
+//     }
+//     ], function(err, results) {
+//       if(err) {throw err;} else {
+//       results.map(function(index) {
+//         var originalScore = index['score'].toString();
+//         index['score'] = originalScore.substring(0, 4)
+//       })
+//         // console.log('results are ', results)
+//         res.send(results)
+//       }
+//     })
+// })
+
+
 
 //function that creates the docs
 //had to add them in increments or else server would crash, hence the specific number in the for loop
