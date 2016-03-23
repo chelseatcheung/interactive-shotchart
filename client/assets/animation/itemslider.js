@@ -1,4 +1,5 @@
-;( function( $, window, undefined ) {
+;
+var itemSlider = function( $, window, undefined ) {
 
   'use strict';
 
@@ -144,4 +145,9 @@
     return instance;
   };
 
-} )( jQuery, window );
+};
+
+
+itemSlider( jQuery, window );
+
+module.exports = itemSlider;

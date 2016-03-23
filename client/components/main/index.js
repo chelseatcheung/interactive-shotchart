@@ -7,11 +7,12 @@ var Main = React.createClass({
   render: function() {
     return (
       <div className="main-container">
-        <div className="main-header">NBA <span className="shot">SHOT</span><span className="chart">CHART</span></div>
+        <img className="main-header" src="/client/assets/images/page-title.png"/>
         <ArrowButtons/>
       </div>
       )
   }
 })
+        // <div className="main-header">NBA <span className="shot">SHOT</span><span className="chart">CHART</span></div>
 
 ReactDOM.render(<Main/>, document.getElementById('app'));

@@ -13,14 +13,10 @@
   src: url('../fonts/BebasNeue.otf');
 }
 
+
 .main-header {
-  padding-top:30px;
-  padding-left:20px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight:700;
-  font-size: 30px;
-  text-align:center;
-  text-decoration:underline;
+  display: block;
+  margin: 0 auto;
 }
 
 .shot {
@@ -44,11 +40,12 @@
 
 .fa:hover {
   cursor:pointer;
-  color:#e54b4b;
+  color:#f49c31;
 }
 
 .rating {
   font-size: 36px;
   font-family: avenir-heavy;
+  color:#f49c31;
   /*color: #7b7aa5;*/
 }

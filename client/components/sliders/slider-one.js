@@ -4,7 +4,7 @@ var playerImgs = require('../../assets/playerimages.js');
 var HighestPoints = require('../slider-options/highestpoints.js');
 var HighestRebounds = require('../slider-options/highestrebounds.js');
 var HighestAssists = require('../slider-options/highestassists.js');
-var HighestSteals = require('../slider-options/higheststeals.js');
+var itemSlider = require('../../assets/animation/itemslider.js');
 
 var Slider = React.createClass({
   getInitialState: function() {
@@ -12,7 +12,6 @@ var Slider = React.createClass({
       option1: 'Points Per Game',
       option2: 'Rebounds Per Game',
       option3: 'Assists Per Game',
-      option4: 'Steals Per Game',
       stats1: {},
       stats2: {},
       stats3: {},
@@ -27,8 +26,12 @@ var Slider = React.createClass({
       var selection = this.innerHTML;
       that.filterQuery(selection);
     })
-  },
 
+    itemSlider( $, window );
+    $(function() {
+        $( '#mi-slider' ).catslider();
+      });
+  },
   filterQuery: function(option) {
     if(option === this.state.option1) {
       this.highestPoints();
@@ -36,8 +39,6 @@ var Slider = React.createClass({
       this.highestRebounds();
     } else if (option === this.state.option3) {
       this.highestAssists();
-    } else if (option === this.state.option4) {
-      this.highestSteals();
     }
   },
   highestPoints: function() {
@@ -76,18 +77,6 @@ var Slider = React.createClass({
       })
     }.bind(this))
   },
-  highestSteals: function() {
-    $.get('/higheststeals', function(results) {
-      // console.log('results are ', results)
-      this.setState({
-        stats1: results[1],
-        stats2: results[2],
-        stats3: results[3],
-        stats4: results[4],
-        stats5: results[5]
-      })
-    }.bind(this))
-  },
   render: function() {
     return (
     <div>
@@ -110,17 +99,10 @@ var Slider = React.createClass({
         stats3={this.state.stats3} 
         stats4={this.state.stats4} 
         stats5={this.state.stats5}/>
-        <HighestSteals 
-        stats1={this.state.stats1} 
-        stats2={this.state.stats2} 
-        stats3={this.state.stats3} 
-        stats4={this.state.stats4} 
-        stats5={this.state.stats5}/>
         <nav>
           <a className="options" href="#">{this.state.option1}</a>
           <a className="options" href="#">{this.state.option2}</a>
           <a className="options" href="#">{this.state.option3}</a>
-          <a className="options" href="#">{this.state.option4}</a>
         </nav>
       </div>
     </div>
