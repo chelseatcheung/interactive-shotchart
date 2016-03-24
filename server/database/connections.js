@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/interactive-shotchart');
+mongoose.connect(process.env.MONGOLAB_URI||'mongodb://localhost/interactive-shotchart');
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
