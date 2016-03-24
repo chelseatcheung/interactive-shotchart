@@ -1,3 +1,5 @@
 node_modules
 client/assets/game-data
-client/assets/parsed-data
+client/assets/parsed-data/2006-2007.regular_season
+client/assets/parsed-data/2007-2008.regular_season
+client/assets/parsed-data/2008-2009.regular_season
