@@ -20,7 +20,7 @@ require('./routes/routes.js');
 
 
 (function createDocs() {
-  fs.readdir('../client/assets/parsed-data/2009-2010.regular_season', function(err,files){
+  fs.readdir('../client/assets/parsed-data/', function(err,files){
    var season = "SeasonFour";
    var game;
    console.log('files in directory in heroku are ', files)
