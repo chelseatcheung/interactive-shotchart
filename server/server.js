@@ -296,38 +296,41 @@ app.use('/highestblocks', function(req, res) {
     })
 })
 
-// app.use('/highestassists', function(req, res) {
-//   Event.aggregate([
-//     {$match:{
-//       assist: {$exists:true, $nin :[null]}
-//     }},
-//     {$group:{
-//       _id:"$assist",
-//       total_assists: {$push: "$assist"},
-//       games:{$addToSet:"$game"},
-//       teams: {$addToSet: "$team"}
-//     }},
-//     {$project: {
-//       _id:true,
-//       score: {$divide:[{$size:"$total_assists"},{$size:"$games"}]},
-//       teams:true
-//     }},
-//     {$sort: {
-//       score: -1
-//     }},
-//     {$limit:6
-//     }
-//     ], function(err, results) {
-//       if(err) {throw err;} else {
-//       results.map(function(index) {
-//         var originalScore = index['score'].toString();
-//         index['score'] = originalScore.substring(0, 4)
-//       })
-//         // console.log('results are ', results)
-//         res.send(results)
-//       }
-//     })
-// })
+app.use('/highestassistpoints', function(req, res) {
+  Event.aggregate([
+    {$match: {
+      $or:[
+      {assist:{$exists:true, $nin:[null]}},
+      {"points":{$gt:0}}
+      ]
+    }},
+    {$group:{
+      _id:"$assist",
+      total_points: {$sum:"$points"},
+      games:{$addToSet:"$game"},
+      teams: {$addToSet:"$team"}
+    }},
+    {$project:{
+      _id:true,
+      score: {$divide:["$total_points",{$size:"$games"}]},
+      teams:true
+    }},
+    {$sort: {
+      score: -1
+    }},
+    {$limit:6
+    }
+    ], function(err, results) {
+      if(err) {throw err;} else {
+      results.map(function(index) {
+        var originalScore = index['score'].toString();
+        index['score'] = originalScore.substring(0, 4)
+      })
+      // console.log('results are ', results)
+        res.send(results)
+      }
+    })
+})
 
 
 

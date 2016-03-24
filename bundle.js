@@ -29769,7 +29769,24 @@
 	  'Rajon Rondo': 'http://l.yimg.com/bt/api/res/1.2/y1bIFeYEaBgCNzAxjsJgIQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4149.png',
 	  'Courtney Lee': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3445.png&w=350&h=254',
 	  'Acie Law': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3219.png&w=350&h=254',
-	  'Danny Granger': 'http://www.hoopsmack.com/wp-content/uploads/2014/01/D.-Granger-headshot.png'
+	  'Danny Granger': 'http://www.hoopsmack.com/wp-content/uploads/2014/01/D.-Granger-headshot.png',
+	  'Mardy Collins': '/client/assets/images/mardy-collins.png',
+	  'Marcus Banks': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2165.png&w=350&h=254',
+	  'Marcus Haislip': '/client/assets/images/marcus-haislip.png',
+	  'Brian Scalabrine': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1021.png&w=350&h=254',
+	  'DeAndre Jordan': 'http://i.cdn.turner.com/nba/nba/.element/img/2.0/sect/statscube/players/large/deandre_jordan.png',
+	  'Brian Cook': 'http://l3.yimg.com/bt/api/res/1.2/mthACCOZ33qNOJmw1dMZNQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20141107/3727.png',
+	  'Alexis Ajinca': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3410.png&w=350&h=254',
+	  'Josh Powell': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2197.png&w=350&h=254',
+	  'Sasha Vujacic': 'http://media.tumblr.com/tumblr_lknfa0R3No1qh4jcw.png',
+	  'Ronnie Price': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2807.png&w=350&h=254',
+	  'Allen Iverson': '/client/assets/images/allen-iverson.png',
+	  'Kyle Weaver': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3466.png&w=350&h=254',
+	  'Serge Ibaka': 'http://i.cdn.turner.com/nba/nba/.element/img/2.0/sect/statscube/players/large/serge_ibaka.png',
+	  'Samuel Dalembert': 'http://www.mobilesolutions.network/cms/common/cdn/wiw/who/thumb/SamuelDalembert.png',
+	  'Hasheem Thabeet': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4016.png&w=350&h=254',
+	  'Erick Dampier': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/181.png&w=350&h=254',
+	  'Brendan Haywood': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254'
 	};
 
 	module.exports = playerImgs;
@@ -30955,6 +30972,15 @@
 	    }.bind(this));
 	  },
 	  highestAssistPoints: function () {
+	    $.get('/highestassistpoints', function (results) {
+	      this.setState({
+	        stats1: results[1],
+	        stats2: results[2],
+	        stats3: results[3],
+	        stats4: results[4],
+	        stats5: results[5]
+	      });
+	    }.bind(this));
 	    console.log('in highest assist points');
 	  },
 	  render: function () {

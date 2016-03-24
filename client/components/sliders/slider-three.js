@@ -62,6 +62,15 @@ var SliderThree = React.createClass({
     }.bind(this))
   },
   highestAssistPoints: function() {
+    $.get('/highestassistpoints', function(results) {
+      this.setState({
+        stats1: results[1],
+        stats2: results[2],
+        stats3: results[3],
+        stats4: results[4],
+        stats5: results[5]
+      })
+    }.bind(this))
     console.log('in highest assist points');
   },
   render: function() {
