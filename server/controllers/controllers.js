@@ -1,5 +1,6 @@
 var Event = require('../database/models/Events.js');
 
+//all of the database queries/calculations
 module.exports = {
   highestPoints: function(req,res){
       Event.aggregate([

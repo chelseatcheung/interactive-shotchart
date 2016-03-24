@@ -4,6 +4,7 @@ var HighestBlocks = require('../slider-options/highestblocks.js');
 var HighestAssistPoints = require('../slider-options/highestassistpoints.js');
 var $ = require('jquery');
 
+//view of slider three, holds content of last three stats
 var SliderThree = React.createClass({
   getInitialState: function() {
     return {

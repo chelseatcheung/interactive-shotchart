@@ -6,7 +6,8 @@ var HighestRebounds = require('../slider-options/highestrebounds.js');
 var HighestAssists = require('../slider-options/highestassists.js');
 var itemSlider = require('../../assets/animation/itemslider.js');
 
-var Slider = React.createClass({
+//view of slider one, holds content of first three stats
+var SliderOne = React.createClass({
   getInitialState: function() {
     return {
       option1: 'Points Per Game',
@@ -107,4 +108,4 @@ var Slider = React.createClass({
   }
 })
 
-module.exports = Slider;
+module.exports = SliderOne;

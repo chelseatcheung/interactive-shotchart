@@ -49,6 +49,7 @@
 	var ArrowButtons = __webpack_require__(159);
 	var MainSlider = __webpack_require__(160);
 
+	//holds banner title and content of slider
 	var Main = React.createClass({
 	  displayName: 'Main',
 
@@ -19678,6 +19679,7 @@
 	  3: 'THREE'
 	};
 
+	//holds arrow buttons and content of slider
 	var ArrowButtons = React.createClass({
 	  displayName: 'ArrowButtons',
 
@@ -19766,6 +19768,7 @@
 	var SliderThree = __webpack_require__(172);
 	var $ = __webpack_require__(162);
 
+	//toggles the views of the three sliders
 	var MainSlider = React.createClass({
 	  displayName: 'MainSlider',
 
@@ -19798,8 +19801,9 @@
 	var HighestAssists = __webpack_require__(166);
 	var itemSlider = __webpack_require__(167);
 
-	var Slider = React.createClass({
-	  displayName: 'Slider',
+	//view of slider one, holds content of first three stats
+	var SliderOne = React.createClass({
+	  displayName: 'SliderOne',
 
 	  getInitialState: function () {
 	    return {
@@ -19917,7 +19921,7 @@
 	  }
 	});
 
-	module.exports = Slider;
+	module.exports = SliderOne;
 
 /***/ },
 /* 162 */
@@ -30322,6 +30326,7 @@
 	var ThreePoints = __webpack_require__(171);
 	var itemslider = __webpack_require__(167);
 
+	//view of slider two, holds content of next three stats
 	var SliderTwo = React.createClass({
 	  displayName: 'SliderTwo',
 
@@ -30828,6 +30833,7 @@
 	var HighestAssistPoints = __webpack_require__(175);
 	var $ = __webpack_require__(162);
 
+	//view of slider three, holds content of last three stats
 	var SliderThree = React.createClass({
 	  displayName: 'SliderThree',
 

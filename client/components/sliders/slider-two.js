@@ -6,6 +6,7 @@ var FreeThrows = require('../slider-options/freethrows.js');
 var ThreePoints = require('../slider-options/threepoints.js');
 var itemslider = require('../../assets/animation/itemslider.js');
 
+//view of slider two, holds content of next three stats
 var SliderTwo = React.createClass({
   getInitialState: function() {
     return {

@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var ArrowButtons = require('./arrowbuttons.js');
 var MainSlider = require('./main-slider.js');
 
+//holds banner title and content of slider
 var Main = React.createClass({
   render: function() {
     return (

@@ -7,6 +7,7 @@ var numbers = {
   3:'THREE'
 }
 
+//holds arrow buttons and content of slider
 var ArrowButtons = React.createClass({
   getInitialState: function() {
     return {
