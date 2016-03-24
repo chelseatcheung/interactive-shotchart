@@ -17,12 +17,14 @@ require('./routes/routes.js');
 
 //function that creates the docs
 //had to add them in increments or else server would crash, hence the specific number in the for loop
-function createDocs () {
+
+
+(function createDocs() {
   fs.readdir('../client/assets/parsed-data/2009-2010.regular_season', function(err,files){
    var season = "SeasonFour";
    var game;
    // loop through the files in folder
-   for(var i=201;i <= 251; i++) {
+   for(var i=39;i <= 200; i++) {
      game = files[i].substring(9,15);
      //read through the content of the files (an array of objects)
      (function(position,contest){
@@ -39,7 +41,7 @@ function createDocs () {
      })(i,game);
    }
   })
-}
+})();
 
 //helper function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
