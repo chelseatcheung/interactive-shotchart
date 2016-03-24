@@ -61,7 +61,6 @@
 	    );
 	  }
 	});
-	// <div className="main-header">NBA <span className="shot">SHOT</span><span className="chart">CHART</span></div>
 
 	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 
@@ -19673,12 +19672,19 @@
 	var React = __webpack_require__(1);
 	var MainSlider = __webpack_require__(160);
 
+	var numbers = {
+	  1: 'ONE',
+	  2: 'TWO',
+	  3: 'THREE'
+	};
+
 	var ArrowButtons = React.createClass({
 	  displayName: 'ArrowButtons',
 
 	  getInitialState: function () {
 	    return {
-	      sliderView: 'sliderOne'
+	      sliderView: 'sliderOne',
+	      pageNumber: 'ONE'
 	    };
 	  },
 	  componentDidMount: function () {
@@ -19695,8 +19701,10 @@
 	    }
 
 	    var newStorage = localStorage.getItem('sliderview');
+	    var page = parseInt(newStorage) + 1;
 	    this.setState({
-	      sliderView: views[newStorage]
+	      sliderView: views[newStorage],
+	      pageNumber: numbers[page]
 	    });
 	  },
 	  changeLeft: function () {
@@ -19710,9 +19718,10 @@
 	    }
 
 	    var newStorage = localStorage.getItem('sliderview');
-
+	    var page = parseInt(newStorage) + 1;
 	    this.setState({
-	      sliderView: views[newStorage]
+	      sliderView: views[newStorage],
+	      pageNumber: numbers[page]
 	    });
 	  },
 	  render: function () {
@@ -19721,22 +19730,25 @@
 	      null,
 	      React.createElement(
 	        'div',
-	        { className: 'row' },
-	        React.createElement(
-	          'div',
-	          { className: 'col-sm-1' },
-	          React.createElement('i', { onClick: this.changeLeft, className: 'fa fa-arrow-circle-left fa-4x' })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'col-md-10' },
-	          React.createElement(MainSlider, { sliderView: this.state.sliderView })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'col-sm-1' },
-	          React.createElement('i', { onClick: this.changeRight, className: 'fa fa-arrow-circle-right fa-4x' })
-	        )
+	        { className: 'col-md-1' },
+	        React.createElement('i', { onClick: this.changeLeft, className: 'fa fa-arrow-circle-left fa-5x' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-10' },
+	        React.createElement(MainSlider, { sliderView: this.state.sliderView })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-1' },
+	        React.createElement('i', { onClick: this.changeRight, className: 'fa fa-arrow-circle-right fa-5x' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'page' },
+	        '-PAGE ',
+	        this.state.pageNumber,
+	        '-'
 	      )
 	    );
 	  }
@@ -19751,7 +19763,7 @@
 	var React = __webpack_require__(1);
 	var SliderOne = __webpack_require__(161);
 	var SliderTwo = __webpack_require__(168);
-	var SliderThree = __webpack_require__(173);
+	var SliderThree = __webpack_require__(172);
 	var $ = __webpack_require__(162);
 
 	var MainSlider = React.createClass({
@@ -19784,7 +19796,7 @@
 	var HighestPoints = __webpack_require__(164);
 	var HighestRebounds = __webpack_require__(165);
 	var HighestAssists = __webpack_require__(166);
-	var itemSlider = __webpack_require__(174);
+	var itemSlider = __webpack_require__(167);
 
 	var Slider = React.createClass({
 	  displayName: 'Slider',
@@ -19825,7 +19837,6 @@
 	  },
 	  highestPoints: function () {
 	    $.get('/highestpoints', function (results) {
-	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[0],
 	        stats2: results[1],
@@ -19837,7 +19848,6 @@
 	  },
 	  highestRebounds: function () {
 	    $.get('/highestrebounds', function (results) {
-	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[1],
 	        stats2: results[2],
@@ -19849,7 +19859,6 @@
 	  },
 	  highestAssists: function () {
 	    $.get('/highestassists', function (results) {
-	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[1],
 	        stats2: results[2],
@@ -30153,123 +30162,153 @@
 
 /***/ },
 /* 167 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(163);
+	;
+	var itemSlider = function ($, window, undefined) {
 
-	var HighestSteals = React.createClass({
-	  displayName: 'HighestSteals',
+	  'use strict';
 
-	  render: function () {
-	    return React.createElement(
-	      'ul',
-	      null,
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#1'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats1["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats1["teams"],
-	        React.createElement('br', null),
-	        this.props.stats1["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#2'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats2["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats2["teams"],
-	        React.createElement('br', null),
-	        this.props.stats2["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#3'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats3["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats3["teams"],
-	        React.createElement('br', null),
-	        this.props.stats3["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#4'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats4["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats4["teams"],
-	        React.createElement('br', null),
-	        this.props.stats4["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#5'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats5["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats5["teams"],
-	        React.createElement('br', null),
-	        this.props.stats5["score"]
-	      )
-	    );
-	  }
-	});
+	  $.CatSlider = function (options, element) {
+	    this.$el = $(element);
+	    this._init(options);
+	  };
 
-	module.exports = HighestSteals;
+	  $.CatSlider.prototype = {
+
+	    _init: function (options) {
+
+	      // the categories (ul)
+	      this.$categories = this.$el.children('ul');
+	      // the navigation
+	      this.$navcategories = this.$el.find('nav > a');
+	      var animEndEventNames = {
+	        'WebkitAnimation': 'webkitAnimationEnd',
+	        'OAnimation': 'oAnimationEnd',
+	        'msAnimation': 'MSAnimationEnd',
+	        'animation': 'animationend'
+	      };
+	      // animation end event name
+	      this.animEndEventName = animEndEventNames[Modernizr.prefixed('animation')];
+	      // animations and transforms support
+	      this.support = Modernizr.csstransforms && Modernizr.cssanimations;
+	      // if currently animating
+	      this.isAnimating = false;
+	      // current category
+	      this.current = 0;
+	      var $currcat = this.$categories.eq(0);
+	      if (!this.support) {
+	        this.$categories.hide();
+	        $currcat.show();
+	      } else {
+	        $currcat.addClass('mi-current');
+	      }
+	      // current nav category
+	      this.$navcategories.eq(0).addClass('mi-selected');
+	      // initialize the events
+	      this._initEvents();
+	    },
+	    _initEvents: function () {
+
+	      var self = this;
+	      this.$navcategories.on('click.catslider', function () {
+
+	        // console.log('this is ', this.innerHTML);
+	        self.showCategory($(this).index());
+	        return false;
+	      });
+
+	      // reset on window resize..
+	      $(window).on('resize', function () {
+	        self.$categories.removeClass().eq(0).addClass('mi-current');
+	        self.$navcategories.eq(self.current).removeClass('mi-selected').end().eq(0).addClass('mi-selected');
+	        self.current = 0;
+	      });
+	    },
+	    showCategory: function (catidx) {
+
+	      if (catidx === this.current || this.isAnimating) {
+	        return false;
+	      }
+	      this.isAnimating = true;
+	      // update selected navigation
+	      this.$navcategories.eq(this.current).removeClass('mi-selected').end().eq(catidx).addClass('mi-selected');
+
+	      var dir = catidx > this.current ? 'right' : 'left',
+	          toClass = dir === 'right' ? 'mi-moveToLeft' : 'mi-moveToRight',
+	          fromClass = dir === 'right' ? 'mi-moveFromRight' : 'mi-moveFromLeft',
+
+	      // current category
+	      $currcat = this.$categories.eq(this.current),
+
+	      // new category
+	      $newcat = this.$categories.eq(catidx),
+	          $newcatchild = $newcat.children(),
+	          lastEnter = dir === 'right' ? $newcatchild.length - 1 : 0,
+	          self = this;
+
+	      if (this.support) {
+
+	        $currcat.removeClass().addClass(toClass);
+
+	        setTimeout(function () {
+
+	          $newcat.removeClass().addClass(fromClass);
+	          $newcatchild.eq(lastEnter).on(self.animEndEventName, function () {
+
+	            $(this).off(self.animEndEventName);
+	            $newcat.addClass('mi-current');
+	            self.current = catidx;
+	            var $this = $(this);
+	            // solve chrome bug
+	            self.forceRedraw($this.get(0));
+	            self.isAnimating = false;
+	          });
+	        }, $newcatchild.length * 90);
+	      } else {
+
+	        $currcat.hide();
+	        $newcat.show();
+	        this.current = catidx;
+	        this.isAnimating = false;
+	      }
+	    },
+	    // based on http://stackoverflow.com/a/8840703/989439
+	    forceRedraw: function (element) {
+	      if (!element) {
+	        return;
+	      }
+	      var n = document.createTextNode(' '),
+	          position = element.style.position;
+	      element.appendChild(n);
+	      element.style.position = 'relative';
+	      setTimeout(function () {
+	        element.style.position = position;
+	        n.parentNode.removeChild(n);
+	      }, 25);
+	    }
+
+	  };
+
+	  $.fn.catslider = function (options) {
+	    var instance = $.data(this, 'catslider');
+	    if (typeof options === 'string') {
+	      var args = Array.prototype.slice.call(arguments, 1);
+	      this.each(function () {
+	        instance[options].apply(instance, args);
+	      });
+	    } else {
+	      this.each(function () {
+	        instance ? instance._init() : instance = $.data(this, 'catslider', new $.CatSlider(options, this));
+	      });
+	    }
+	    return instance;
+	  };
+	};
+
+	itemSlider(jQuery, window);
+
+	module.exports = itemSlider;
 
 /***/ },
 /* 168 */
@@ -30281,7 +30320,7 @@
 	var FieldGoals = __webpack_require__(169);
 	var FreeThrows = __webpack_require__(170);
 	var ThreePoints = __webpack_require__(171);
-	var itemslider = __webpack_require__(174);
+	var itemslider = __webpack_require__(167);
 
 	var SliderTwo = React.createClass({
 	  displayName: 'SliderTwo',
@@ -30322,7 +30361,6 @@
 	  },
 	  fieldGoal: function () {
 	    $.get('/fieldgoals', function (results) {
-	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[0],
 	        stats2: results[1],
@@ -30334,7 +30372,6 @@
 	  },
 	  freeThrow: function () {
 	    $.get('/freethrows', function (results) {
-	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[0],
 	        stats2: results[1],
@@ -30346,7 +30383,6 @@
 	  },
 	  threePoints: function () {
 	    $.get('/threepoints', function (results) {
-	      // console.log('results are ', results)
 	      this.setState({
 	        stats1: results[1],
 	        stats2: results[2],
@@ -30787,129 +30823,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var playerImgs = __webpack_require__(163);
-
-	var HighestBlocks = React.createClass({
-	  displayName: 'HighestBlocks',
-
-	  render: function () {
-	    return React.createElement(
-	      'ul',
-	      null,
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#1'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats1["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats1["teams"],
-	        React.createElement('br', null),
-	        this.props.stats1["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#2'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats2["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats2["teams"],
-	        React.createElement('br', null),
-	        this.props.stats2["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#3'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats3["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats3["teams"],
-	        React.createElement('br', null),
-	        this.props.stats3["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#4'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats4["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats4["teams"],
-	        React.createElement('br', null),
-	        this.props.stats4["score"]
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          'span',
-	          { className: 'rating' },
-	          '#5'
-	        ),
-	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
-	        React.createElement(
-	          'span',
-	          { className: 'player-name' },
-	          this.props.stats5["_id"]
-	        ),
-	        React.createElement('br', null),
-	        'Team: ',
-	        this.props.stats5["teams"],
-	        React.createElement('br', null),
-	        this.props.stats5["score"]
-	      )
-	    );
-	  }
-	});
-
-	module.exports = HighestBlocks;
-
-/***/ },
-/* 173 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var HighestSteals = __webpack_require__(167);
-	var HighestBlocks = __webpack_require__(172);
-	var HighestAssistPoints = __webpack_require__(176);
+	var HighestSteals = __webpack_require__(173);
+	var HighestBlocks = __webpack_require__(174);
+	var HighestAssistPoints = __webpack_require__(175);
 	var $ = __webpack_require__(162);
 
 	var SliderThree = React.createClass({
@@ -30918,8 +30834,8 @@
 	  getInitialState: function () {
 	    return {
 	      option1: 'Highest Steals',
-	      option2: 'Blocks Per Game',
-	      option3: 'Assist Points Per Game',
+	      option2: 'Highest Blocks',
+	      option3: 'Highest Assist Points',
 	      stats1: {},
 	      stats2: {},
 	      stats3: {},
@@ -31035,158 +30951,237 @@
 	module.exports = SliderThree;
 
 /***/ },
-/* 174 */
-/***/ function(module, exports) {
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
 
-	;
-	var itemSlider = function ($, window, undefined) {
+	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(163);
 
-	  'use strict';
+	var HighestSteals = React.createClass({
+	  displayName: 'HighestSteals',
 
-	  $.CatSlider = function (options, element) {
-	    this.$el = $(element);
-	    this._init(options);
-	  };
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#1'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats1["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: NJN',
+	        React.createElement('br', null),
+	        this.props.stats1["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#2'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats2["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: MIA',
+	        React.createElement('br', null),
+	        this.props.stats2["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#3'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats3["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: GSW',
+	        React.createElement('br', null),
+	        this.props.stats3["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#4'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats4["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: LAL',
+	        React.createElement('br', null),
+	        this.props.stats4["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#5'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats5["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: IND',
+	        React.createElement('br', null),
+	        this.props.stats5["score"]
+	      )
+	    );
+	  }
+	});
 
-	  $.CatSlider.prototype = {
-
-	    _init: function (options) {
-
-	      // the categories (ul)
-	      this.$categories = this.$el.children('ul');
-	      // the navigation
-	      this.$navcategories = this.$el.find('nav > a');
-	      var animEndEventNames = {
-	        'WebkitAnimation': 'webkitAnimationEnd',
-	        'OAnimation': 'oAnimationEnd',
-	        'msAnimation': 'MSAnimationEnd',
-	        'animation': 'animationend'
-	      };
-	      // animation end event name
-	      this.animEndEventName = animEndEventNames[Modernizr.prefixed('animation')];
-	      // animations and transforms support
-	      this.support = Modernizr.csstransforms && Modernizr.cssanimations;
-	      // if currently animating
-	      this.isAnimating = false;
-	      // current category
-	      this.current = 0;
-	      var $currcat = this.$categories.eq(0);
-	      if (!this.support) {
-	        this.$categories.hide();
-	        $currcat.show();
-	      } else {
-	        $currcat.addClass('mi-current');
-	      }
-	      // current nav category
-	      this.$navcategories.eq(0).addClass('mi-selected');
-	      // initialize the events
-	      this._initEvents();
-	    },
-	    _initEvents: function () {
-
-	      var self = this;
-	      this.$navcategories.on('click.catslider', function () {
-
-	        // console.log('this is ', this.innerHTML);
-	        self.showCategory($(this).index());
-	        return false;
-	      });
-
-	      // reset on window resize..
-	      $(window).on('resize', function () {
-	        self.$categories.removeClass().eq(0).addClass('mi-current');
-	        self.$navcategories.eq(self.current).removeClass('mi-selected').end().eq(0).addClass('mi-selected');
-	        self.current = 0;
-	      });
-	    },
-	    showCategory: function (catidx) {
-
-	      if (catidx === this.current || this.isAnimating) {
-	        return false;
-	      }
-	      this.isAnimating = true;
-	      // update selected navigation
-	      this.$navcategories.eq(this.current).removeClass('mi-selected').end().eq(catidx).addClass('mi-selected');
-
-	      var dir = catidx > this.current ? 'right' : 'left',
-	          toClass = dir === 'right' ? 'mi-moveToLeft' : 'mi-moveToRight',
-	          fromClass = dir === 'right' ? 'mi-moveFromRight' : 'mi-moveFromLeft',
-
-	      // current category
-	      $currcat = this.$categories.eq(this.current),
-
-	      // new category
-	      $newcat = this.$categories.eq(catidx),
-	          $newcatchild = $newcat.children(),
-	          lastEnter = dir === 'right' ? $newcatchild.length - 1 : 0,
-	          self = this;
-
-	      if (this.support) {
-
-	        $currcat.removeClass().addClass(toClass);
-
-	        setTimeout(function () {
-
-	          $newcat.removeClass().addClass(fromClass);
-	          $newcatchild.eq(lastEnter).on(self.animEndEventName, function () {
-
-	            $(this).off(self.animEndEventName);
-	            $newcat.addClass('mi-current');
-	            self.current = catidx;
-	            var $this = $(this);
-	            // solve chrome bug
-	            self.forceRedraw($this.get(0));
-	            self.isAnimating = false;
-	          });
-	        }, $newcatchild.length * 90);
-	      } else {
-
-	        $currcat.hide();
-	        $newcat.show();
-	        this.current = catidx;
-	        this.isAnimating = false;
-	      }
-	    },
-	    // based on http://stackoverflow.com/a/8840703/989439
-	    forceRedraw: function (element) {
-	      if (!element) {
-	        return;
-	      }
-	      var n = document.createTextNode(' '),
-	          position = element.style.position;
-	      element.appendChild(n);
-	      element.style.position = 'relative';
-	      setTimeout(function () {
-	        element.style.position = position;
-	        n.parentNode.removeChild(n);
-	      }, 25);
-	    }
-
-	  };
-
-	  $.fn.catslider = function (options) {
-	    var instance = $.data(this, 'catslider');
-	    if (typeof options === 'string') {
-	      var args = Array.prototype.slice.call(arguments, 1);
-	      this.each(function () {
-	        instance[options].apply(instance, args);
-	      });
-	    } else {
-	      this.each(function () {
-	        instance ? instance._init() : instance = $.data(this, 'catslider', new $.CatSlider(options, this));
-	      });
-	    }
-	    return instance;
-	  };
-	};
-
-	itemSlider(jQuery, window);
-
-	module.exports = itemSlider;
+	module.exports = HighestSteals;
 
 /***/ },
-/* 175 */,
-/* 176 */
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var playerImgs = __webpack_require__(163);
+
+	var HighestBlocks = React.createClass({
+	  displayName: 'HighestBlocks',
+
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#1'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats1["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats1["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: PHI',
+	        React.createElement('br', null),
+	        this.props.stats1["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#2'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats2["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats2["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: MEM',
+	        React.createElement('br', null),
+	        this.props.stats2["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#3'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats3["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats3["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: DAL',
+	        React.createElement('br', null),
+	        this.props.stats3["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#4'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats4["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats4["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: OCT',
+	        React.createElement('br', null),
+	        this.props.stats4["score"]
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          'span',
+	          { className: 'rating' },
+	          '#5'
+	        ),
+	        React.createElement('img', { src: playerImgs[this.props.stats5["_id"]] }),
+	        React.createElement(
+	          'span',
+	          { className: 'player-name' },
+	          this.props.stats5["_id"]
+	        ),
+	        React.createElement('br', null),
+	        'Team: WAS',
+	        React.createElement('br', null),
+	        this.props.stats5["score"]
+	      )
+	    );
+	  }
+	});
+
+	module.exports = HighestBlocks;
+
+/***/ },
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);

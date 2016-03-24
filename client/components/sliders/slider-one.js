@@ -43,7 +43,6 @@ var Slider = React.createClass({
   },
   highestPoints: function() {
     $.get('/highestpoints', function(results) {
-      // console.log('results are ', results)
       this.setState({
         stats1: results[0],
         stats2: results[1],
@@ -55,7 +54,6 @@ var Slider = React.createClass({
   },
   highestRebounds: function() {
     $.get('/highestrebounds', function(results) {
-      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],
@@ -67,7 +65,6 @@ var Slider = React.createClass({
   },
   highestAssists: function() {
     $.get('/highestassists', function(results) {
-      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],

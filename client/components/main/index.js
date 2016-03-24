@@ -13,6 +13,5 @@ var Main = React.createClass({
       )
   }
 })
-        // <div className="main-header">NBA <span className="shot">SHOT</span><span className="chart">CHART</span></div>
 
 ReactDOM.render(<Main/>, document.getElementById('app'));

@@ -43,7 +43,6 @@ var SliderTwo = React.createClass({
   },
   fieldGoal: function() {
     $.get('/fieldgoals', function(results) {
-      // console.log('results are ', results)
       this.setState({
         stats1: results[0],
         stats2: results[1],
@@ -55,7 +54,6 @@ var SliderTwo = React.createClass({
   },
   freeThrow: function() {
     $.get('/freethrows', function(results) {
-      // console.log('results are ', results)
       this.setState({
         stats1: results[0],
         stats2: results[1],
@@ -67,7 +65,6 @@ var SliderTwo = React.createClass({
   },
   threePoints: function() {
     $.get('/threepoints', function(results) {
-      // console.log('results are ', results)
       this.setState({
         stats1: results[1],
         stats2: results[2],

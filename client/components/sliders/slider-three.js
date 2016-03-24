@@ -8,8 +8,8 @@ var SliderThree = React.createClass({
   getInitialState: function() {
     return {
       option1: 'Highest Steals',
-      option2: 'Blocks Per Game',
-      option3: 'Assist Points Per Game',
+      option2: 'Highest Blocks',
+      option3: 'Highest Assist Points',
       stats1: {},
       stats2: {},
       stats3: {},

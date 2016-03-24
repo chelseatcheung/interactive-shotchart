@@ -3,11 +3,6 @@
   src: url('../fonts/avenir-book.ttf');
 }
 
-@font-face {
-  font-family: bebas-neue;
-  src: url('../fonts/BebasNeue.otf');
-}
-
 .mi-slider {
   position: relative;
   margin-top: 30px;
@@ -290,4 +285,8 @@
   .mi-slider nav {
     display: none;
   }
+}
+
+ul, menu, dir {
+  -webkit-padding-start: 0px;
 }
