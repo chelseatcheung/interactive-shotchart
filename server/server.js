@@ -19,37 +19,37 @@ require('./routes/routes.js');
 //had to add them in increments or else server would crash, hence the specific number in the for loop
 
 
-// (function createDocs() {
-//   fs.readdir(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season'), function(err,files){
-//    var season = "SeasonFour";
-//    var game;
-//    // loop through the files in folder
-//    for(var i=39;i <= 59; i++) {
-//      game = files[i].substring(9,15);
-//      // read through the content of the files (an array of objects)
-//      (function(position,contest){
-//        fs.readFile(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season/'+files[position]), 'utf8', function (err, data) {
-//           if(err) {
-//            throw err;
-//           } else {
-//            arrayOfObj = JSON.parse(data);
-//            for(var j=0; j < arrayOfObj.length; j++) {
-//              createNewEvent(arrayOfObj[j], season, contest);
-//            }
-//           }
-//        })
-//      })(i,game);
-//    }
-//   })
-// })();
-
-(function testing () {
-  Event.collection.stats(function(err, results) {
-    if(err) {throw err} else {
-      console.log('results are ', results)
-    }
+(function createDocs() {
+  fs.readdir(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season'), function(err,files){
+   var season = "SeasonFour";
+   var game;
+   // loop through the files in folder
+   for(var i=39;i <= 59; i++) {
+     game = files[i].substring(9,15);
+     // read through the content of the files (an array of objects)
+     (function(position,contest){
+       fs.readFile(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season/'+files[position]), 'utf8', function (err, data) {
+          if(err) {
+           throw err;
+          } else {
+           arrayOfObj = JSON.parse(data);
+           for(var j=0; j < arrayOfObj.length; j++) {
+             createNewEvent(arrayOfObj[j], season, contest);
+           }
+          }
+       })
+     })(i,game);
+   }
   })
-})()
+})();
+
+// (function testing () {
+//   Event.collection.stats(function(err, results) {
+//     if(err) {throw err} else {
+//       console.log('results are ', results)
+//     }
+//   })
+// })()
 
 //helper function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
