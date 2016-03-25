@@ -43,6 +43,14 @@ require('./routes/routes.js');
 //   })
 // })();
 
+(function testing () {
+  Event.collection.stats(function(err, results) {
+    if(err) {throw err} else {
+      console.log('results are ', results)
+    }
+  })
+})()
+
 //helper function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
   var creation = new Event(obj);
@@ -66,7 +74,7 @@ var findFromDB = function (season) {
     console.log('results is', result);
    };
   }).count({},function(err,count){console.log('count is ',count)});
-}();
+};
 
 
 
