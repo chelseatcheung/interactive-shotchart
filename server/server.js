@@ -26,7 +26,7 @@ require('./routes/routes.js');
    // loop through the files in folder
    for(var i=39;i <= 200; i++) {
      game = files[i].substring(9,15);
-     read through the content of the files (an array of objects)
+     // read through the content of the files (an array of objects)
      (function(position,contest){
        fs.readFile('../client/assets/parsed-data/2009-2010.regular_season/'+files[position], 'utf8', function (err, data) {
           if(err) {
