@@ -66,7 +66,7 @@ var findFromDB = function (season) {
     console.log('results is', result);
    };
   }).count({},function(err,count){console.log('count is ',count)});
-}();
+};
 
 
 
@@ -80,7 +80,7 @@ var removeSeason = function () {
       console.log('all deleted');
     }
   })
-};
+}();
 
 
 app.listen(PORT, function() {
