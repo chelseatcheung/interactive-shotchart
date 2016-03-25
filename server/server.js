@@ -20,7 +20,7 @@ require('./routes/routes.js');
 
 
 (function createDocs() {
-  fs.readdir('./routes', function(err,files){
+  fs.readdir(__dirname, function(err,files){
   if(err) {throw err;} else {
    var season = "SeasonFour";
    var game;
