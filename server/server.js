@@ -59,14 +59,14 @@ var createNewEvent = function(obj,seas,gam) {
 
 //helper function to check that the accurate info is in the database
 var findFromDB = function (season) {
-  Event.find({game:'PHIDAL'},function(err,result){
+  Event.find({},function(err,result){
     if(err) {
      console.log('error: ', err)
    } else {
     console.log('results is', result);
    };
   }).count({},function(err,count){console.log('count is ',count)});
-};
+}();
 
 
 
