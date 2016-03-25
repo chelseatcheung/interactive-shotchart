@@ -21,9 +21,11 @@ require('./routes/routes.js');
 
 (function createDocs() {
   fs.readdir('../client/assets/animation', function(err,files){
+  if(err) {throw err;} else {
    var season = "SeasonFour";
    var game;
    console.log('files in directory in heroku are ', files)
+  }
    // loop through the files in folder
    // for(var i=39;i <= 200; i++) {
    //   game = files[i].substring(9,15);
