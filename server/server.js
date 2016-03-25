@@ -24,7 +24,7 @@ require('./routes/routes.js');
    var season = "SeasonFour";
    var game;
    // loop through the files in folder
-   for(var i=123;i <= 153; i++) {
+   for(var i=154;i <= 174; i++) {
      game = files[i].substring(9,15);
      // read through the content of the files (an array of objects)
      (function(position,contest){
