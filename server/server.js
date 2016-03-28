@@ -86,7 +86,7 @@ var removeSeason = function () {
       console.log('all deleted');
     }
   })
-};
+}();
 
 module.exports = app;
 require('./routes/routes.js');

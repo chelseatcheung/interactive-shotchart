@@ -21,7 +21,7 @@ var SliderTwo = React.createClass({
     }
   },
   componentDidMount: function() {
-    // this.fieldGoal();   
+    this.fieldGoal();   
     var that = this;
     $('.options').on('click', function() {
       var selection = this.innerHTML;
@@ -43,15 +43,15 @@ var SliderTwo = React.createClass({
     }
   },
   fieldGoal: function() {
-    // $.get('/fieldgoals', function(results) {
-    //   this.setState({
-    //     stats1: results[0],
-    //     stats2: results[1],
-    //     stats3: results[2],
-    //     stats4: results[3],
-    //     stats5: results[4]
-    //   })
-    // }.bind(this))
+    $.get('/fieldgoals', function(results) {
+      this.setState({
+        stats1: results[0],
+        stats2: results[1],
+        stats3: results[2],
+        stats4: results[3],
+        stats5: results[4]
+      })
+    }.bind(this))
   },
   freeThrow: function() {
     $.get('/freethrows', function(results) {
@@ -65,15 +65,15 @@ var SliderTwo = React.createClass({
     }.bind(this))
   },
   threePoints: function() {
-    // $.get('/threepoints', function(results) {
-    //   this.setState({
-    //     stats1: results[1],
-    //     stats2: results[2],
-    //     stats3: results[3],
-    //     stats4: results[4],
-    //     stats5: results[5]
-    //   })
-    // }.bind(this))
+    $.get('/threepoints', function(results) {
+      this.setState({
+        stats1: results[1],
+        stats2: results[2],
+        stats3: results[3],
+        stats4: results[4],
+        stats5: results[5]
+      })
+    }.bind(this))
   },
   render: function() {
     return (
