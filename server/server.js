@@ -10,8 +10,6 @@ var arrayOfObj;
 
 
 app.use(express.static(path.join(__dirname,'../')));
-module.exports = app;
-require('./routes/routes.js');
 
 
 
@@ -74,7 +72,7 @@ var findFromDB = function (season) {
     console.log('results is', result);
    };
   }).count({},function(err,count){console.log('count is ',count)});
-}();
+};
 
 
 
@@ -89,6 +87,9 @@ var removeSeason = function () {
     }
   })
 };
+
+module.exports = app;
+require('./routes/routes.js');
 
 
 app.listen(PORT, function() {
