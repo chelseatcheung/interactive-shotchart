@@ -40,7 +40,7 @@ var createDocs = function() {
    }
    console.log('DONE, SON!!!')
   })
-}();
+};
 
 //helper function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
@@ -65,7 +65,7 @@ var findFromDB = function (season) {
     console.log('results is');
    };
   }).count({},function(err,count){console.log('count is ',count)});
-};
+}();
 
 
 
