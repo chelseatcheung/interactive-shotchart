@@ -65,7 +65,7 @@ var findFromDB = function (season) {
     console.log('results is');
    };
   }).count({},function(err,count){console.log('count is ',count)});
-};
+}();
 
 
 
