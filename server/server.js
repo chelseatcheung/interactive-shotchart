@@ -22,7 +22,7 @@ var createDocs = function() {
    var season = "SeasonFour";
    var game;
    // loop through the files in folder
-   for(var i=144;i <= 164; i++) {
+   for(var i=165;i <= 185; i++) {
      game = files[i].substring(9,15);
      // read through the content of the files (an array of objects)
      (function(position,contest){
@@ -65,7 +65,7 @@ var findFromDB = function (season) {
     console.log('results is');
    };
   }).count({},function(err,count){console.log('count is ',count)});
-}();
+};
 
 
 
