@@ -141,31 +141,40 @@ module.exports = {
     }},
     {$group: {
       _id:"$player",
-      shots:{$push:"$result"},
+      score:{$push:"$result"},
       teams: {$addToSet:"$team"},
     }},
-    {$project: {
-      _id:true,
-      score:{$multiply:[{$divide:[{$size:{$filter:{
-        input:"$shots",
-        as:"shot",
-        cond:{$eq:["$$shot","made"]}
-      }}}, {$size:"$shots"}]}, 100]},
-      teams: true
-    }},
-    {$sort: {
-      score: -1
-    }},
-    {$limit:6
-    }
+    // {$project: {
+    //   _id:true,
+    //   score:{$multiply:[{$divide:[{$size:{$filter:{
+    //     input:"$shots",
+    //     as:"shot",
+    //     cond:{$eq:["$$shot","made"]}
+    //   }}}, {$size:"$shots"}]}, 100]},
+    //   teams: true
+    // }},
+    // {$sort: {
+    //   score: -1
+    // }},
+    // {$limit:6
+    // }
     ], function(err, results) {
       if(err) {
         throw err; 
       } else {
+        var obj = {'made':0, 'total_shots':0}
         results.map(function(index) {
-          var originalScore = index['score'].toString();
-          index['score'] = originalScore.substring(0, 4)
+          obj['made'] = 0;
+          obj['total_shots'] = index['score'].length;
+          index['score'].map(function(i) {
+            if(i === 'made') {
+              obj['made']++;
+            }
+          })
+          index['score'] = ((obj['made'] / obj['total_shots']) * 100).toString();
+          index['score'] = index['score'].substring(0,4)
         })
+        results.sort(function(a,b){return b['score']-a['score'];});
         res.status(200).send(results);
       }
     })
@@ -210,31 +219,40 @@ module.exports = {
       }},
       {$group: {
         _id:"$player",
-        shots:{$push:"$result"},
+        score:{$push:"$result"},
         teams: {$addToSet:"$team"},
       }},
-      {$project: {
-      _id:true,
-      score:{$multiply:[{$divide:[{$size:{$filter:{
-        input:"$shots",
-        as:"shot",
-        cond:{$eq:["$$shot","made"]}
-      }}}, {$size:"$shots"}]}, 100]},
-      teams: true
-      }},
-      {$sort: {
-        score: -1
-      }},
-      {$limit:6
-      }
+      // {$project: {
+      // _id:true,
+      // score:{$multiply:[{$divide:[{$size:{$filter:{
+      //   input:"$shots",
+      //   as:"shot",
+      //   cond:{$eq:["$$shot","made"]}
+      // }}}, {$size:"$shots"}]}, 100]},
+      // teams: true
+      // }},
+      // {$sort: {
+      //   score: -1
+      // }},
+      // {$limit:6
+      // }
       ], function(err, results) {
         if(err) {
           throw err; 
         } else {
+          var obj = {'made':0, 'total_shots':0}
           results.map(function(index) {
-            var originalScore = index['score'].toString();
-            index['score'] = originalScore.substring(0, 4)
+            obj['made'] = 0;
+            obj['total_shots'] = index['score'].length;
+            index['score'].map(function(i) {
+              if(i === 'made') {
+                obj['made']++;
+              }
+            })
+            index['score'] = ((obj['made'] / obj['total_shots']) * 100).toString();
+            index['score'] = index['score'].substring(0,4)
           })
+          results.sort(function(a,b){return b['score']-a['score'];});
           res.status(200).send(results);
         }
       })

@@ -38,7 +38,6 @@ var createDocs = function() {
        })
      })(i,game);
    }
-   console.log('DONE, SON!!!')
   })
 };
 
@@ -65,7 +64,7 @@ var findFromDB = function (season) {
     console.log('results is');
    };
   }).count({},function(err,count){console.log('count is ',count)});
-}();
+};
 
 
 
