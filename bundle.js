@@ -29813,7 +29813,7 @@
 	  'Brendan Haywood': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254',
 	  'Kevin Durant': 'http://www.jockington.com/wp-content/uploads/2014/08/3202.png',
 	  'Andrew Bynum': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2748.png&w=350&h=254',
-	  'Gerard Wallace': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1026.png&w=350&h=254',
+	  'Gerald Wallace': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1026.png&w=350&h=254',
 	  'Dante Cunningham': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3974.png&w=350&h=254',
 	  'Kosta Koufos': 'http://l2.yimg.com/bt/api/res/1.2/SoPOwdbKEhrcFFEqOevzcA--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4485.png',
 	  'Roger Mason': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1721.png&w=350&h=254',
