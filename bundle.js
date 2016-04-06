@@ -19928,7 +19928,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * jQuery JavaScript Library v2.2.1
+	 * jQuery JavaScript Library v2.2.2
 	 * http://jquery.com/
 	 *
 	 * Includes Sizzle.js
@@ -19938,7 +19938,7 @@
 	 * Released under the MIT license
 	 * http://jquery.org/license
 	 *
-	 * Date: 2016-02-22T19:11Z
+	 * Date: 2016-03-17T17:51Z
 	 */
 
 	(function( global, factory ) {
@@ -19994,7 +19994,7 @@
 
 
 	var
-		version = "2.2.1",
+		version = "2.2.2",
 
 		// Define a local copy of jQuery
 		jQuery = function( selector, context ) {
@@ -20205,6 +20205,7 @@
 		},
 
 		isPlainObject: function( obj ) {
+			var key;
 
 			// Not plain objects:
 			// - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -20214,14 +20215,18 @@
 				return false;
 			}
 
+			// Not own constructor property must be Object
 			if ( obj.constructor &&
-					!hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
+					!hasOwn.call( obj, "constructor" ) &&
+					!hasOwn.call( obj.constructor.prototype || {}, "isPrototypeOf" ) ) {
 				return false;
 			}
 
-			// If the function hasn't returned already, we're confident that
-			// |obj| is a plain object, created by {} or constructed with new Object
-			return true;
+			// Own properties are enumerated firstly, so to speed up,
+			// if last one is own, then all properties are own
+			for ( key in obj ) {}
+
+			return key === undefined || hasOwn.call( obj, key );
 		},
 
 		isEmptyObject: function( obj ) {
@@ -27254,6 +27259,12 @@
 		}
 	} );
 
+	// Support: IE <=11 only
+	// Accessing the selectedIndex property
+	// forces the browser to respect setting selected
+	// on the option
+	// The getter ensures a default option is selected
+	// when in an optgroup
 	if ( !support.optSelected ) {
 		jQuery.propHooks.selected = {
 			get: function( elem ) {
@@ -27262,6 +27273,16 @@
 					parent.parentNode.selectedIndex;
 				}
 				return null;
+			},
+			set: function( elem ) {
+				var parent = elem.parentNode;
+				if ( parent ) {
+					parent.selectedIndex;
+
+					if ( parent.parentNode ) {
+						parent.parentNode.selectedIndex;
+					}
+				}
 			}
 		};
 	}
@@ -27456,7 +27477,8 @@
 
 
 
-	var rreturn = /\r/g;
+	var rreturn = /\r/g,
+		rspaces = /[\x20\t\r\n\f]+/g;
 
 	jQuery.fn.extend( {
 		val: function( value ) {
@@ -27532,9 +27554,15 @@
 			option: {
 				get: function( elem ) {
 
-					// Support: IE<11
-					// option.value not trimmed (#14858)
-					return jQuery.trim( elem.value );
+					var val = jQuery.find.attr( elem, "value" );
+					return val != null ?
+						val :
+
+						// Support: IE10-11+
+						// option.text throws exceptions (#14686, #14858)
+						// Strip and collapse whitespace
+						// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
+						jQuery.trim( jQuery.text( elem ) ).replace( rspaces, " " );
 				}
 			},
 			select: {
@@ -27587,7 +27615,7 @@
 					while ( i-- ) {
 						option = options[ i ];
 						if ( option.selected =
-								jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1
+							jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1
 						) {
 							optionSet = true;
 						}
@@ -29282,18 +29310,6 @@
 
 
 
-	// Support: Safari 8+
-	// In Safari 8 documents created via document.implementation.createHTMLDocument
-	// collapse sibling forms: the second one becomes a child of the first one.
-	// Because of that, this security measure has to be disabled in Safari 8.
-	// https://bugs.webkit.org/show_bug.cgi?id=137337
-	support.createHTMLDocument = ( function() {
-		var body = document.implementation.createHTMLDocument( "" ).body;
-		body.innerHTML = "<form></form><form></form>";
-		return body.childNodes.length === 2;
-	} )();
-
-
 	// Argument "data" should be string of html
 	// context (optional): If specified, the fragment will be created in this context,
 	// defaults to document
@@ -29306,12 +29322,7 @@
 			keepScripts = context;
 			context = false;
 		}
-
-		// Stop scripts or inline event handlers from being executed immediately
-		// by using document.implementation
-		context = context || ( support.createHTMLDocument ?
-			document.implementation.createHTMLDocument( "" ) :
-			document );
+		context = context || document;
 
 		var parsed = rsingleTag.exec( data ),
 			scripts = !keepScripts && [];
@@ -29765,41 +29776,58 @@
 /***/ function(module, exports) {
 
 	var playerImgs = {
-	  'Kevin Martin': 'http://l.yimg.com/bt/api/res/1.2/NN7Vr0lFsVQVQ1sEzQ78JQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3843.png',
-	  'Dwyane Wade': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1987.png&w=350&h=254',
-	  'Carmelo Anthony': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1975.png&w=350&h=254',
-	  'LeBron James': 'http://forums.nba-live.com/dl_mod/thumbs/3638_MIA_James_LeBron.png',
-	  'Kobe Bryant': 'http://www.financialnewsusa.com/wp-content/uploads/2014/12/1101.png',
-	  'Joakim Noah': 'http://2008-09chicagobulls.weebly.com/uploads/2/5/0/3/25039641/2762106_orig.png',
-	  'Pau Gasol': 'http://l.yimg.com/bt/api/res/1.2/zGHb.TGQsuQT.d_OvaJ7Kw--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3513.png',
-	  'Antawn Jamison': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/385.png&w=350&h=254',
-	  'Marcus Camby': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/125.png',
-	  'Chris Bosh': 'http://2.bp.blogspot.com/-HU7mE29kBcQ/VNKN1t-4ALI/AAAAAAAAA3g/HnlkI60-7J4/s1600/i.png',
-	  'Steve Nash': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/592.png&w=350&h=254',
-	  'Chris Paul': 'http://forums.nba-live.com/dl_mod/thumbs/5646_LAC_Paul_Chris.png',
-	  'Deron Williams': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2798.png&w=350&h=254',
-	  'Jason Kidd': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/429.png&w=350&h=254',
-	  'Rajon Rondo': 'http://l.yimg.com/bt/api/res/1.2/y1bIFeYEaBgCNzAxjsJgIQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4149.png',
-	  'Courtney Lee': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3445.png&w=350&h=254',
-	  'Acie Law': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3219.png&w=350&h=254',
-	  'Danny Granger': 'http://www.hoopsmack.com/wp-content/uploads/2014/01/D.-Granger-headshot.png',
+	  'Kevin Martin': 'https://l.yimg.com/bt/api/res/1.2/NN7Vr0lFsVQVQ1sEzQ78JQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3843.png',
+	  'Dwyane Wade': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1987.png&w=350&h=254',
+	  'Carmelo Anthony': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1975.png&w=350&h=254',
+	  'LeBron James': 'https://forums.nba-live.com/dl_mod/thumbs/3638_MIA_James_LeBron.png',
+	  'Kobe Bryant': 'https://www.financialnewsusa.com/wp-content/uploads/2014/12/1101.png',
+	  'Joakim Noah': 'https://2008-09chicagobulls.weebly.com/uploads/2/5/0/3/25039641/2762106_orig.png',
+	  'Pau Gasol': 'https://l.yimg.com/bt/api/res/1.2/zGHb.TGQsuQT.d_OvaJ7Kw--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3513.png',
+	  'Antawn Jamison': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/385.png&w=350&h=254',
+	  'Marcus Camby': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/125.png',
+	  'Chris Bosh': 'https://2.bp.blogspot.com/-HU7mE29kBcQ/VNKN1t-4ALI/AAAAAAAAA3g/HnlkI60-7J4/s1600/i.png',
+	  'Steve Nash': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/592.png&w=350&h=254',
+	  'Chris Paul': 'https://forums.nba-live.com/dl_mod/thumbs/5646_LAC_Paul_Chris.png',
+	  'Deron Williams': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2798.png&w=350&h=254',
+	  'Jason Kidd': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/429.png&w=350&h=254',
+	  'Rajon Rondo': 'https://l.yimg.com/bt/api/res/1.2/y1bIFeYEaBgCNzAxjsJgIQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4149.png',
+	  'Courtney Lee': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3445.png&w=350&h=254',
+	  'Acie Law': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3219.png&w=350&h=254',
+	  'Danny Granger': 'https://www.hoopsmack.com/wp-content/uploads/2014/01/D.-Granger-headshot.png',
 	  'Mardy Collins': '/client/assets/images/mardy-collins.png',
-	  'Marcus Banks': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2165.png&w=350&h=254',
+	  'Marcus Banks': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2165.png&w=350&h=254',
 	  'Marcus Haislip': '/client/assets/images/marcus-haislip.png',
-	  'Brian Scalabrine': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1021.png&w=350&h=254',
-	  'DeAndre Jordan': 'http://i.cdn.turner.com/nba/nba/.element/img/2.0/sect/statscube/players/large/deandre_jordan.png',
-	  'Brian Cook': 'http://l3.yimg.com/bt/api/res/1.2/mthACCOZ33qNOJmw1dMZNQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20141107/3727.png',
-	  'Alexis Ajinca': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3410.png&w=350&h=254',
-	  'Josh Powell': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2197.png&w=350&h=254',
-	  'Sasha Vujacic': 'http://media.tumblr.com/tumblr_lknfa0R3No1qh4jcw.png',
-	  'Ronnie Price': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2807.png&w=350&h=254',
+	  'Brian Scalabrine': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1021.png&w=350&h=254',
+	  'DeAndre Jordan': 'https://i.cdn.turner.com/nba/nba/.element/img/2.0/sect/statscube/players/large/deandre_jordan.png',
+	  'Brian Cook': 'https://l3.yimg.com/bt/api/res/1.2/mthACCOZ33qNOJmw1dMZNQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20141107/3727.png',
+	  'Alexis Ajinca': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3410.png&w=350&h=254',
+	  'Josh Powell': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2197.png&w=350&h=254',
+	  'Sasha Vujacic': 'https://media.tumblr.com/tumblr_lknfa0R3No1qh4jcw.png',
+	  'Ronnie Price': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2807.png&w=350&h=254',
 	  'Allen Iverson': '/client/assets/images/allen-iverson.png',
-	  'Kyle Weaver': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3466.png&w=350&h=254',
-	  'Serge Ibaka': 'http://i.cdn.turner.com/nba/nba/.element/img/2.0/sect/statscube/players/large/serge_ibaka.png',
-	  'Samuel Dalembert': 'http://www.mobilesolutions.network/cms/common/cdn/wiw/who/thumb/SamuelDalembert.png',
-	  'Hasheem Thabeet': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4016.png&w=350&h=254',
-	  'Erick Dampier': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/181.png&w=350&h=254',
-	  'Brendan Haywood': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254'
+	  'Kyle Weaver': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3466.png&w=350&h=254',
+	  'Serge Ibaka': 'https://i.cdn.turner.com/nba/nba/.element/img/2.0/sect/statscube/players/large/serge_ibaka.png',
+	  'Samuel Dalembert': 'https://www.mobilesolutions.network/cms/common/cdn/wiw/who/thumb/SamuelDalembert.png',
+	  'Hasheem Thabeet': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4016.png&w=350&h=254',
+	  'Erick Dampier': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/181.png&w=350&h=254',
+	  'Brendan Haywood': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254',
+	  'Kevin Durant': 'http://www.jockington.com/wp-content/uploads/2014/08/3202.png',
+	  'Andrew Bynum': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2748.png&w=350&h=254',
+	  'Gerard Wallace': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1026.png&w=350&h=254',
+	  'Dante Cunningham': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3974.png&w=350&h=254',
+	  'Kosta Koufos': 'http://l2.yimg.com/bt/api/res/1.2/SoPOwdbKEhrcFFEqOevzcA--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4485.png',
+	  'Roger Mason': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1721.png&w=350&h=254',
+	  'Jannero Pargo': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1821.png&w=350&h=254',
+	  'Sasha Pavlovic': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2172.png&w=350&h=254',
+	  'Johan Petro': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2780.png&w=350&h=254',
+	  'Craig Smith': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3031.png&w=350&h=254',
+	  'James Jones': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2009.png&w=350&h=254',
+	  'Al Horford': 'http://a3.res.cloudinary.com/talent/image/fetch/t_face_s270/http://speakerdata.s3.amazonaws.com/photo/image/827701/i',
+	  'Antonio McDyess': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/530.png&w=350&h=254',
+	  'Jordan Hill': 'http://l.yimg.com/bt/api/res/1.2/lgC2ikAugGlc6MlLgQD_Ig--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4613.png',
+	  'Richard Jefferson': 'http://l1.yimg.com/bt/api/res/1.2/Y9DWwggYeLYaTNgkGUSYAQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3523.png',
+	  'Brook Lopez': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3448.png&w=350&h=254',
+	  'Roy Hibbert': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3436.png&w=350&h=254'
 	};
 
 	module.exports = playerImgs;
@@ -30903,7 +30931,6 @@
 	        stats5: results[5]
 	      });
 	    }.bind(this));
-	    console.log('in highest assist points');
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -30985,7 +31012,7 @@
 	          this.props.stats1["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: NJN',
+	        'Team: BOS',
 	        React.createElement('br', null),
 	        this.props.stats1["score"]
 	      ),
@@ -31004,7 +31031,7 @@
 	          this.props.stats2["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: MIA',
+	        'Team: GSW',
 	        React.createElement('br', null),
 	        this.props.stats2["score"]
 	      ),
@@ -31023,7 +31050,7 @@
 	          this.props.stats3["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: GSW',
+	        'Team: SAS',
 	        React.createElement('br', null),
 	        this.props.stats3["score"]
 	      ),
@@ -31042,7 +31069,7 @@
 	          this.props.stats4["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: LAL',
+	        'Team: HOU',
 	        React.createElement('br', null),
 	        this.props.stats4["score"]
 	      ),
@@ -31061,7 +31088,7 @@
 	          this.props.stats5["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: IND',
+	        'Team: SAS',
 	        React.createElement('br', null),
 	        this.props.stats5["score"]
 	      )
@@ -31119,7 +31146,7 @@
 	          this.props.stats2["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: MEM',
+	        'Team: WAS',
 	        React.createElement('br', null),
 	        this.props.stats2["score"]
 	      ),
@@ -31157,7 +31184,7 @@
 	          this.props.stats4["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: OCT',
+	        'Team: NJN',
 	        React.createElement('br', null),
 	        this.props.stats4["score"]
 	      ),
@@ -31176,7 +31203,7 @@
 	          this.props.stats5["_id"]
 	        ),
 	        React.createElement('br', null),
-	        'Team: WAS',
+	        'Team: IND',
 	        React.createElement('br', null),
 	        this.props.stats5["score"]
 	      )

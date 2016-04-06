@@ -72,7 +72,6 @@ var SliderThree = React.createClass({
         stats5: results[5]
       })
     }.bind(this))
-    console.log('in highest assist points');
   },
   render: function() {
     return (
