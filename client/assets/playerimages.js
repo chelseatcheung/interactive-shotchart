@@ -33,7 +33,24 @@ var playerImgs = {
   'Samuel Dalembert': 'https://www.mobilesolutions.network/cms/common/cdn/wiw/who/thumb/SamuelDalembert.png',
   'Hasheem Thabeet': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4016.png&w=350&h=254',
   'Erick Dampier': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/181.png&w=350&h=254',
-  'Brendan Haywood': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254'
+  'Brendan Haywood': 'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254',
+  'Kevin Durant': 'http://www.jockington.com/wp-content/uploads/2014/08/3202.png',
+  'Andrew Bynum': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2748.png&w=350&h=254',
+  'Gerard Wallace': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1026.png&w=350&h=254',
+  'Dante Cunningham': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3974.png&w=350&h=254',
+  'Kosta Koufos': 'http://l2.yimg.com/bt/api/res/1.2/SoPOwdbKEhrcFFEqOevzcA--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4485.png',
+  'Roger Mason':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1721.png&w=350&h=254',
+  'Jannero Pargo':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1821.png&w=350&h=254',
+  'Sasha Pavlovic':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2172.png&w=350&h=254',
+  'Johan Petro':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2780.png&w=350&h=254',
+  'Craig Smith':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3031.png&w=350&h=254',
+  'James Jones':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2009.png&w=350&h=254',
+  'Al Horford':'http://a3.res.cloudinary.com/talent/image/fetch/t_face_s270/http://speakerdata.s3.amazonaws.com/photo/image/827701/i',
+  'Antonio McDyess':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/530.png&w=350&h=254',
+  'Jordan Hill':'http://l.yimg.com/bt/api/res/1.2/lgC2ikAugGlc6MlLgQD_Ig--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/4613.png',
+  'Richard Jefferson':'http://l1.yimg.com/bt/api/res/1.2/Y9DWwggYeLYaTNgkGUSYAQ--/YXBwaWQ9eW5ld3NfbGVnbztmaT1maWxsO2g9MjMwO3E9NzU7dz0zNDU-/https://s.yimg.com/xe/i/us/sp/v/nba_cutout/players_l/20151027/3523.png',
+  'Brook Lopez':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3448.png&w=350&h=254',
+  'Roy Hibbert':'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3436.png&w=350&h=254'
 }
 
 module.exports = playerImgs;

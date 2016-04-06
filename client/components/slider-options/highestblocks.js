@@ -16,7 +16,7 @@ var HighestBlocks = React.createClass({
             <span className="rating">#2</span>
             <img src={playerImgs[this.props.stats2["_id"]]}/>
             <span className="player-name">{this.props.stats2["_id"]}</span>
-            <br/>Team: MEM
+            <br/>Team: WAS
             <br/>{this.props.stats2["score"]}
           </li>
           <li>
@@ -30,14 +30,14 @@ var HighestBlocks = React.createClass({
             <span className="rating">#4</span>
             <img src={playerImgs[this.props.stats4["_id"]]}/>
             <span className="player-name">{this.props.stats4["_id"]}</span>
-            <br/>Team: OCT
+            <br/>Team: NJN
             <br/>{this.props.stats4["score"]}
           </li>
           <li>
             <span className="rating">#5</span>
             <img src={playerImgs[this.props.stats5["_id"]]}/>
             <span className="player-name">{this.props.stats5["_id"]}</span>
-            <br/>Team: WAS
+            <br/>Team: IND
             <br/>{this.props.stats5["score"]}
           </li>
         </ul>
