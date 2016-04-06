@@ -33,7 +33,7 @@ var playerImgs = {
   'Samuel Dalembert': 'http://www.mobilesolutions.network/cms/common/cdn/wiw/who/thumb/SamuelDalembert.png',
   'Hasheem Thabeet': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/4016.png&w=350&h=254',
   'Erick Dampier': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/181.png&w=350&h=254',
-  'Brendan Haywood': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254'
+  'Brendan Haywood': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1000.png&w=350&h=254',
   'Kevin Durant': 'http://www.jockington.com/wp-content/uploads/2014/08/3202.png',
   'Andrew Bynum': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2748.png&w=350&h=254',
   'Gerard Wallace': 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1026.png&w=350&h=254',
