@@ -17,7 +17,7 @@ Data is taken from http://www.basketballgeek.com/data/ and animated slider is ut
 
 ```
 npm install
-mongodb
+mongod
 nodemon server/server.js
 
 ```

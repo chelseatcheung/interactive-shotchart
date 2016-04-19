@@ -7,9 +7,9 @@
     "start": "node server/server.js",
     "test": "webpack -w"
   },
-  "engines":{
-    "node":"5.7.1"
-  },  
+  "engines": {
+    "node": "5.7.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chelseatcheung/interactive-shotchart.git"
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/chelseatcheung/interactive-shotchart#readme",
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "babel-core": "^6.6.5",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",

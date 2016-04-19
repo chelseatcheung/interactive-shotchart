@@ -7,39 +7,79 @@ var connection = require('./database/connections.js');
 var Event = require('./database/models/Events.js');
 var query = require('./controllers/controllers.js');
 var arrayOfObj;
-
+var async = require('async');
 
 app.use(express.static(path.join(__dirname,'../')));
 
 
-
 //function that creates the docs
 //had to add them in increments or else server would crash, hence the specific number in the for loop
+// var createDocs = function() {
+//   fs.readdir(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season'), function(err,files){
+//    var season = "SeasonFour";
+//    var game;
+//    // loop through the files in folder
+//    for(var i=165;i <= 185; i++) {
+//      game = files[i].substring(9,15);
+//      // read through the content of the files (an array of objects)
+//      (function(position,contest){
+//        fs.readFile(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season/'+files[position]), 'utf8', function (err, data) {
+//           if(err) {
+//            throw err;
+//           } else {
+//            arrayOfObj = JSON.parse(data);
+//            for(var j=0; j < arrayOfObj.length; j++) {
+//              createNewEvent(arrayOfObj[j], season, contest);
+//            }
+//           }
+//        })
+//      })(i,game);
+//    }
+//   })
+// };
 
 
+//iterator that the async.each in readEachFile uses
+var callCreateNewEvent = function(event, callback){
+  createNewEvent(event, season, game);
+  callback();
+}
+
+//iterator that the async.each in createDocs uses
+var readEachFile = function (file, callback){
+  game = files[i].substring(9, 15);
+  fs.readFile(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season/'+file), 'utf8', function (err, data) {
+    if(err) {
+     callback(err);
+    } else {
+      arrayOfObj = JSON.parse(data);
+      async.each(arrayOfObj, callCreateNewEvent, function(err) {
+        if(err) {
+          throw err;
+        } else {
+          console.log('all events saved')
+        }
+      })
+    }
+  })
+ callback();  
+}
+
+//function that initiates the population of database
 var createDocs = function() {
   fs.readdir(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season'), function(err,files){
-   var season = "SeasonFour";
-   var game;
-   // loop through the files in folder
-   for(var i=165;i <= 185; i++) {
-     game = files[i].substring(9,15);
-     // read through the content of the files (an array of objects)
-     (function(position,contest){
-       fs.readFile(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season/'+files[position]), 'utf8', function (err, data) {
-          if(err) {
-           throw err;
-          } else {
-           arrayOfObj = JSON.parse(data);
-           for(var j=0; j < arrayOfObj.length; j++) {
-             createNewEvent(arrayOfObj[j], season, contest);
-           }
-          }
-       })
-     })(i,game);
-   }
+    var season = "SeasonFour";
+    var game;
+    async.each(files, readEachFile, function(err) {
+      if(err) {
+        throw err;
+      } else {
+        console.log('success!');
+      } 
+    })  
   })
-};
+}
+
 
 //helper function that creates new instance of schema
 var createNewEvent = function(obj,seas,gam) {
@@ -48,7 +88,7 @@ var createNewEvent = function(obj,seas,gam) {
   creation.season= seas;
   creation.save(function(err){
     if(err){
-      console.log('save error: ',err);
+      callback(err);
     }else{
       console.log('saved!');
     }
