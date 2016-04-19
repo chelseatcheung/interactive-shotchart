@@ -47,7 +47,7 @@ var callCreateNewEvent = function(event, callback){
 
 //iterator that the async.each in createDocs uses
 var readEachFile = function (file, callback){
-  game = files[i].substring(9, 15);
+  game = file.substring(9, 15);
   fs.readFile(path.join(__dirname,'../client/assets/parsed-data/2009-2010.regular_season/'+file), 'utf8', function (err, data) {
     if(err) {
      callback(err);
