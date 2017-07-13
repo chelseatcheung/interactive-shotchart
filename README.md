@@ -1,5 +1,5 @@
 # interactive-shotchart
-###NBA Shotchart
+### NBA Shotchart
 
 http://nba-shotchart.herokuapp.com
 
@@ -7,7 +7,7 @@ Single page web application that shows statistics for NBA games for the month of
 
 Data is taken from http://www.basketballgeek.com/data/ and animated slider is utilized from https://github.com/codrops/ItemSlider.
 
-###Getting started
+### Getting started
 
 * Go to basketballgeek.com/data and download the 2009-2010 season
 * Parse the data into JSON folders (my gulpfile.js will be useful for this)
